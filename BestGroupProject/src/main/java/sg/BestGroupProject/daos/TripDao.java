@@ -8,6 +8,7 @@ package sg.BestGroupProject.daos;
 import java.time.LocalDate;
 import java.util.List;
 import sg.BestGroupProject.models.Event;
+import sg.BestGroupProject.models.SiteUser;
 import sg.BestGroupProject.models.Trip;
 
 /**
@@ -16,7 +17,7 @@ import sg.BestGroupProject.models.Trip;
  */
 public interface TripDao {
     
-    int createTrip(String name);
+    int createTrip(Trip trip);
     Trip getTripById (int id);
     void updatedTrip (Trip trip);
     Event addEvent (Event event);
@@ -26,5 +27,7 @@ public interface TripDao {
     List<Event> getEventsByTrip (int tripId);
     void updateEvent (Event event);
     void deleteEvent (int id);
+    List<SiteUser> getTeachersForTrip (int id);
+    List<SiteUser> getStudentsForTrip (int id);
     
 }
