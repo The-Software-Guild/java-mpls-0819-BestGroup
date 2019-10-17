@@ -19,7 +19,11 @@ public class SiteUser {
     private String password;
     private boolean enabled;
     private Set<Role> roles;
-
+    private String firstName;
+    private String lastName;
+    private String schoolName;
+    private String emergencyContactName;
+    private int emergencyContactPhone;
     /**
      * @return the id
      */
@@ -93,11 +97,11 @@ public class SiteUser {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + this.id;
-        hash = 89 * hash + Objects.hashCode(this.username);
-        hash = 89 * hash + Objects.hashCode(this.password);
-        hash = 89 * hash + (this.enabled ? 1 : 0);
-        hash = 89 * hash + Objects.hashCode(this.roles);
+        hash = 89 * hash + this.getId();
+        hash = 89 * hash + Objects.hashCode(this.getUsername());
+        hash = 89 * hash + Objects.hashCode(this.getPassword());
+        hash = 89 * hash + (this.isEnabled() ? 1 : 0);
+        hash = 89 * hash + Objects.hashCode(this.getRoles());
         return hash;
     }
 
@@ -114,5 +118,75 @@ public class SiteUser {
         if(!this.getUsername().equals(that.getUsername())) return false;
         
         return Objects.equals(this.getRoles(), that.getRoles());
+    }
+
+    /**
+     * @return the firstName
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * @param lastName the lastName to set
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * @return the schoolName
+     */
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    /**
+     * @param schoolName the schoolName to set
+     */
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
+    /**
+     * @return the emergencyContactName
+     */
+    public String getEmergencyContactName() {
+        return emergencyContactName;
+    }
+
+    /**
+     * @param emergencyContactName the emergencyContactName to set
+     */
+    public void setEmergencyContactName(String emergencyContactName) {
+        this.emergencyContactName = emergencyContactName;
+    }
+
+    /**
+     * @return the emergencyContactPhone
+     */
+    public int getEmergencyContactPhone() {
+        return emergencyContactPhone;
+    }
+
+    /**
+     * @param emergencyContactPhone the emergencyContactPhone to set
+     */
+    public void setEmergencyContactPhone(int emergencyContactPhone) {
+        this.emergencyContactPhone = emergencyContactPhone;
     }
 }

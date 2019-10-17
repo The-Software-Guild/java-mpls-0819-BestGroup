@@ -14,7 +14,9 @@ import java.util.Objects;
 public class Role {
     private int id;
     private String role;
-
+    
+    
+    
     public int getId() {
         return id;
     }
