@@ -33,7 +33,7 @@ create table Trip (
 id int primary key auto_increment,
 `name` varchar (75) not null,
 StartDate date not null,
-EndDat date not null);
+EndDate date not null);
 
 create table UserTrip (
 TripId int not null,
