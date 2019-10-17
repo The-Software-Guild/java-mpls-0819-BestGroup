@@ -30,7 +30,8 @@ public class UserDbDao implements UserDao {
 
     @Override
     public SiteUser getUserById(int id) {
-        String select = "SELECT id, username, password, enabled FROM user where id=?";
+        String select = "SELECT id, username, password, enabled, firstname, lastname, schoolname,"
+                + " emergencycontactname, emergencycontactphone FROM user where id = ?";
 
         SiteUser toReturn = jdbc.queryForObject(select, new UserMapper(), id);
 
@@ -43,7 +44,8 @@ public class UserDbDao implements UserDao {
 
     @Override
     public SiteUser getUserByUsername(String username) {
-        String select = "SELECT id, username, password, enabled FROM user where username=?";
+        String select = "SELECT id, username, password, enabled, firstname, lastname, schoolname,"
+                + " emergencycontactname, emergencycontactphone FROM user where username = ?";
 
         SiteUser toReturn = jdbc.queryForObject(select, new UserMapper(), username);
 
@@ -56,7 +58,8 @@ public class UserDbDao implements UserDao {
 
     @Override
     public List<SiteUser> getAllUsers() {
-        String select = "SELECT id, username, password, enabled FROM user";
+        String select = "SELECT id, username, password, enabled, firstname, lastname, schoolname,"
+                + " emergencycontactname, emergencycontactphone FROM user";
 
         List<SiteUser> allUsers = jdbc.query(select, new UserMapper());
 
@@ -71,10 +74,12 @@ public class UserDbDao implements UserDao {
     @Override
     public void updateUser(SiteUser user) {
 
-        String updateStatement = "Update user SET username = ?, password = ?, enabled = ? WHERE id = ?";
+        String updateStatement = "Update user SET username = ?, password = ?, enabled = ?, firstname = ?,"
+                + " lastname = ?, schoolname = ?, emergencycontactname = ?, emergencycontactphone = ?, WHERE id = ?";
 
         int updateRowsAffected = jdbc.update(updateStatement, user.getUsername(),
-                user.getPassword(), user.isEnabled(), user.getId());
+                user.getPassword(), user.isEnabled(), user.getFirstName(), user.getLastName(), 
+                user.getSchoolName(), user.getEmergencyContactName(), user.getEmergencyContactPhone(), user.getId());
 
         //TODO: CHECK THAT ROWS AFFECTED =1
         String deleteStatement = "DELETE FROM user_role WHERE user_id = ?";
@@ -107,9 +112,12 @@ public class UserDbDao implements UserDao {
     @Transactional
     @Override
     public SiteUser createUser(SiteUser user) {
-        String insertStatement = "INSERT INTO user (username, password, enabled) VALUES (?, ?, ?)";
+        String insertStatement = "INSERT INTO user (username, password, enabled, firstname, lastname, schoolname, "
+                + "emergencycontactname, emergencycontactphone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        int insertRows = jdbc.update(insertStatement, user.getUsername(), user.getPassword(), user.isEnabled());
+        int insertRows = jdbc.update(insertStatement, user.getUsername(), user.getPassword(), user.isEnabled(),
+                user.getFirstName(), user.getLastName(), user.getSchoolName(), 
+                user.getEmergencyContactName(), user.getEmergencyContactPhone());
 
         int newId = jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class);
         user.setId(newId);
@@ -209,6 +217,11 @@ public class UserDbDao implements UserDao {
             toReturn.setPassword(results.getString("password"));
             toReturn.setEnabled(results.getBoolean("enabled"));
             toReturn.setUsername(results.getString("username"));
+            toReturn.setFirstName(results.getString("firstname"));
+            toReturn.setLastName(results.getString("lastname"));
+            toReturn.setSchoolName(results.getString("schoolname"));
+            toReturn.setEmergencyContactName(results.getString("emergencycontactname"));
+            toReturn.setEmergencyContactPhone(results.getInt("emergencycontactphone"));
             
             return toReturn;
 
