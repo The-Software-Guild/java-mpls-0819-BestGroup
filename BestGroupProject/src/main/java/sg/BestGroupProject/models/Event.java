@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  *
  * @author cas
  */
-public class Events {
+public class Event {
     
     private LocalDateTime startTime;
     private LocalDateTime endTime;
