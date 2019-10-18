@@ -20,7 +20,7 @@ public interface UserDao {
     List<SiteUser> getAllUsers();
     void updateUser(SiteUser user);
     void deleteUser(int id);
-    SiteUser createUser(SiteUser user);
+    SiteUser createUser(SiteUser user, int tripId);
     
     Role getRoleById(int id);
     Role getRoleByRole(String role);

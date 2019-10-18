@@ -111,7 +111,7 @@ public class UserDbDao implements UserDao {
 
     @Transactional
     @Override
-    public SiteUser createUser(SiteUser user) {
+    public SiteUser createUser(SiteUser user, int tripId) {
         String insertStatement = "INSERT INTO user (username, password, enabled, firstname, lastname, schoolname, "
                 + "emergencycontactname, emergencycontactphone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -128,6 +128,10 @@ public class UserDbDao implements UserDao {
             int roleRowsAffected = jdbc.update(roleInsert, newId, toAdd.getId());
             //TODO: Make sure 1 row was affected
         }
+        
+        String userTripInsert = "INSERT INTO usertrip (UserId, TripId) VALUES (?, ?)";
+        
+        jdbc.update(userTripInsert, user.getId(), tripId);
 
         return user;
     }
