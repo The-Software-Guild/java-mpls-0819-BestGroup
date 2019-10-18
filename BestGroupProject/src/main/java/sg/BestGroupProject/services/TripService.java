@@ -7,9 +7,12 @@ package sg.BestGroupProject.services;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import sg.BestGroupProject.daos.DaoException;
 import sg.BestGroupProject.daos.TripDao;
 import sg.BestGroupProject.daos.UserDao;
 import sg.BestGroupProject.models.Event;
@@ -35,10 +38,14 @@ public class TripService {
         if (trip == null || trip.getName().isEmpty()) {
             response.setMessage("Trip must have a name to be created.");
         } else {
-            int id = tDao.createTrip(trip);
-            
-            response.setData(id);
-            response.setSuccess(true);
+            try {
+                int id = tDao.createTrip(trip);
+                
+                response.setData(id);
+                response.setSuccess(true);
+            } catch (DaoException ex) {
+                response.setMessage(ex.getMessage());
+            }
         }
         return response;
     }
@@ -49,16 +56,20 @@ public class TripService {
         if (id <= 0) {
             response.setMessage("Invalid id");
         } else {
-            Trip trip = tDao.getTripById(id);
-            List<Event> events = tDao.getEventsByTrip(id);
-            List<SiteUser> travellers = uDao.getAllUsers();
-            List<SiteUser> teachers = travellers.stream().filter(i -> i.getRoles().size() == 2).collect(Collectors.toList());
-            List<SiteUser> students = travellers.stream().filter(i -> i.getRoles().size() == 2).collect(Collectors.toList());
-            trip.setTeachers(teachers);
-            trip.setStudents(students);
-            trip.setEvents(events);
-            response.setData(trip);
-            response.setSuccess(true);
+            try {
+                Trip trip = tDao.getTripById(id);
+                List<Event> events = tDao.getEventsByTrip(id);
+                List<SiteUser> travellers = uDao.getAllUsers();
+                List<SiteUser> teachers = travellers.stream().filter(i -> i.getRoles().size() == 2).collect(Collectors.toList());
+                List<SiteUser> students = travellers.stream().filter(i -> i.getRoles().size() == 2).collect(Collectors.toList());
+                trip.setTeachers(teachers);
+                trip.setStudents(students);
+                trip.setEvents(events);
+                response.setData(trip);
+                response.setSuccess(true);
+            } catch (DaoException ex) {
+                response.setMessage(ex.getMessage());
+            }
             
         }
         
@@ -109,9 +120,13 @@ public class TripService {
         if (id <= 0) {
             response.setMessage("Invalid event id. Please try again");
         } else {
-            Event event = tDao.getEventById(id);
-            response.setData(event);
-            response.setSuccess(true);
+            try {
+                Event event = tDao.getEventById(id);
+                response.setData(event);
+                response.setSuccess(true);
+            } catch (DaoException ex) {
+                response.setMessage(ex.getMessage());
+            }
         }
         
         return response;
@@ -119,35 +134,46 @@ public class TripService {
     
     public Response<List<Event>> getEventsByDate(LocalDate date, int tripId) {
         Response response = new Response();
-        Trip trip = tDao.getTripById(tripId);
         
-        if (date.isAfter(trip.getEndDate()) || date.isBefore(trip.getStartDate())) {
-            response.setMessage("Date given falls outside of the trip dates");
-        } else {
-            List<Event> events = tDao.getEventsByDate(date, tripId);
-            response.setData(events);
-            response.setSuccess(true);
+        try {
+            Trip trip = tDao.getTripById(tripId);
+            
+            if (date.isAfter(trip.getEndDate()) || date.isBefore(trip.getStartDate())) {
+                response.setMessage("Date given falls outside of the trip dates");
+            } else {
+                List<Event> events = tDao.getEventsByDate(date, tripId);
+                response.setData(events);
+                response.setSuccess(true);
+            }
+            
+        } catch (DaoException ex) {
+            response.setMessage(ex.getMessage());
         }
-        
         return response;
     }
     
     public Response<List<Event>> getEventsByWeek(List<LocalDate> dates, int tripId) {
         Response response = new Response();
-        Trip trip = tDao.getTripById(tripId);
         
-        for (LocalDate date : dates) {
-            if (date.isAfter(trip.getEndDate()) || date.isBefore(trip.getStartDate())) {
-                response.setMessage("Dates given falls outside of the trip dates");
-                return response;
+        try {
+            Trip trip = tDao.getTripById(tripId);
+            
+            for (LocalDate date : dates) {
+                if (date.isAfter(trip.getEndDate()) || date.isBefore(trip.getStartDate())) {
+                    response.setMessage("Dates given falls outside of the trip dates");
+                    return response;
+                }
             }
+            
+            List<Event> events = tDao.getEventsByWeek(dates, tripId);
+            response.setData(events);
+            response.setSuccess(true);
+            
+        } catch (DaoException ex) {
+            response.setMessage(ex.getMessage());
         }
-        
-        List<Event> events = tDao.getEventsByWeek(dates, tripId);
-        response.setData(events);
-        response.setSuccess(true);
-        
         return response;
+        
     }
     
     public Response<List<Event>> getEventsByTrip(int tripId) {
@@ -174,7 +200,5 @@ public class TripService {
         
         return response;
     }
-    
-    
     
 }

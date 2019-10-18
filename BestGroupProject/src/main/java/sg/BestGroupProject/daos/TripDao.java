@@ -22,8 +22,8 @@ public interface TripDao {
     void updatedTrip (Trip trip);
     Event addEvent (Event event);
     Event getEventById (int id) throws DaoException;
-    List<Event> getEventsByDate (LocalDate date);
-    List<Event> getEventsByWeek (List<LocalDate> week);
+    List<Event> getEventsByDate (LocalDate date, int tripId);
+    List<Event> getEventsByWeek (List<LocalDate> week, int tripId);
     List<Event> getEventsByTrip (int tripId);
     void updateEvent (Event event);
     void deleteEvent (int id);
