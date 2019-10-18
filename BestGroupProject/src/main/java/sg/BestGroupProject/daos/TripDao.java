@@ -8,6 +8,7 @@ package sg.BestGroupProject.daos;
 import java.time.LocalDate;
 import java.util.List;
 import sg.BestGroupProject.models.Event;
+import sg.BestGroupProject.models.SiteUser;
 import sg.BestGroupProject.models.Trip;
 
 /**
@@ -16,13 +17,13 @@ import sg.BestGroupProject.models.Trip;
  */
 public interface TripDao {
     
-    int createTrip(String name);
-    Trip getTripById (int id);
+    int createTrip(Trip trip) throws DaoException;
+    Trip getTripById (int id) throws DaoException;
     void updatedTrip (Trip trip);
     Event addEvent (Event event);
-    Event getEventById (int id);
-    List<Event> getEventsByDate (LocalDate date);
-    List<Event> getEventsByWeek (List<LocalDate> week);
+    Event getEventById (int id) throws DaoException;
+    List<Event> getEventsByDate (LocalDate date, int tripId);
+    List<Event> getEventsByWeek (List<LocalDate> week, int tripId);
     List<Event> getEventsByTrip (int tripId);
     void updateEvent (Event event);
     void deleteEvent (int id);

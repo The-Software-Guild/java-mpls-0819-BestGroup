@@ -6,6 +6,7 @@
 package sg.BestGroupProject.models;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,9 @@ public class Trip {
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
+    private List<SiteUser> teachers;
+    private List<SiteUser> students;
+    private List<Event> events;
 
     /**
      * @return the id
@@ -71,6 +75,48 @@ public class Trip {
      */
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    /**
+     * @return the teachers
+     */
+    public List<SiteUser> getTeachers() {
+        return teachers;
+    }
+
+    /**
+     * @param teachers the teachers to set
+     */
+    public void setTeachers(List<SiteUser> teachers) {
+        this.teachers = teachers;
+    }
+
+    /**
+     * @return the students
+     */
+    public List<SiteUser> getStudents() {
+        return students;
+    }
+
+    /**
+     * @param students the students to set
+     */
+    public void setStudents(List<SiteUser> students) {
+        this.students = students;
+    }
+
+    /**
+     * @return the events
+     */
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    /**
+     * @param events the events to set
+     */
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
     
 }
