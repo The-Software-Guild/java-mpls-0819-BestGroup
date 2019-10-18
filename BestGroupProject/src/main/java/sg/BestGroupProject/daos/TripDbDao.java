@@ -113,12 +113,12 @@ public class TripDbDao implements TripDao {
     }
 
     @Override
-    public List<Event> getEventsByDate(LocalDate date) {
+    public List<Event> getEventsByDate(LocalDate date, int tripId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Event> getEventsByWeek(List<LocalDate> week) {
+    public List<Event> getEventsByWeek(List<LocalDate> week, int tripId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
