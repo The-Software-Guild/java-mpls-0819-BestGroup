@@ -17,17 +17,15 @@ import sg.BestGroupProject.models.Trip;
  */
 public interface TripDao {
     
-    int createTrip(Trip trip);
-    Trip getTripById (int id);
+    int createTrip(Trip trip) throws DaoException;
+    Trip getTripById (int id) throws DaoException;
     void updatedTrip (Trip trip);
     Event addEvent (Event event);
-    Event getEventById (int id);
-    List<Event> getEventsByDate (LocalDate date, int tripId);
-    List<Event> getEventsByWeek (List<LocalDate> week, int tripId);
+    Event getEventById (int id) throws DaoException;
+    List<Event> getEventsByDate (LocalDate date);
+    List<Event> getEventsByWeek (List<LocalDate> week);
     List<Event> getEventsByTrip (int tripId);
     void updateEvent (Event event);
     void deleteEvent (int id);
-    List<SiteUser> getTeachersForTrip (int id);
-    List<SiteUser> getStudentsForTrip (int id);
     
 }
