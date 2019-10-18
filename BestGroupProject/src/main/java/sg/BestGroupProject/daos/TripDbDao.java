@@ -178,6 +178,7 @@ public class TripDbDao implements TripDao {
         jdbc.update(update, event.getName(), event.getStartTime(), event.getEndTime(),
                     event.getLocation(), event.getDescription(), categoryId, 
                     event.getTransportationId(), event.getTripId());
+
     }
 
     @Override
