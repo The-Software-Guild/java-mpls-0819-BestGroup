@@ -186,7 +186,7 @@ public class TripService {
         return response;
     }
     
-    public Response<Event> updateEvent(Event event) {
+    public Response updateEvent(Event event) {
         Response response = new Response();
         
         if (event == null || event.getStartTime() == null || event.getEndTime() == null
@@ -198,6 +198,20 @@ public class TripService {
             response.setSuccess(true);
         }
         
+        return response;
+    }
+    
+    public Response deleteEvent(int id){
+         Response response = new Response();
+         
+        try {
+            tDao.deleteEvent(id);
+            response.setSuccess(true);
+            
+            
+        } catch (DaoException ex) {
+            response.setMessage(ex.getMessage());
+        }
         return response;
     }
     

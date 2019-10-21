@@ -90,12 +90,54 @@ public class TripDbDao implements TripDao {
 
     @Override
     public void updatedTrip(Trip trip) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String update = "UPDATE Trip SET `name` = ?, startdate = ?, enddate = ?";
+        
+        jdbc.update(update, trip.getName(), trip.getStartDate(), trip.getEndDate());
+        
     }
 
     @Override
     public Event addEvent(Event event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String insert = "INSERT INTO Event (`name`, starttime, endtime, "
+                + "location, description, categoryId, transportId, tripId)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        GeneratedKeyHolder holder = new GeneratedKeyHolder();
+
+        PreparedStatementCreator psc = new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement toReturn = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+                
+                int categoryId = -1;
+        
+                    if(event.getCategory() == Category.transportation) categoryId = 1;
+                    if(event.getCategory() == Category.hotelReservation) categoryId = 2;
+                    if(event.getCategory() == Category.attraction) categoryId = 3;
+                    if(event.getCategory() == Category.meal) categoryId = 4;
+                    if(event.getCategory() == Category.freeTime) categoryId = 5;
+
+                toReturn.setString(1, event.getName());
+                toReturn.setString(2, event.getStartTime().toString());
+                toReturn.setString(3, event.getEndTime().toString());
+                toReturn.setString(4, event.getLocation());
+                toReturn.setString(5, event.getDescription());
+                toReturn.setInt(6, categoryId);
+                toReturn.setString(7, event.getTransportationId());
+                toReturn.setInt(8, event.getTripId());
+
+                return toReturn;
+            }
+        };
+        
+        jdbc.update(psc, holder);
+
+        int generatedId = holder.getKey().intValue();
+
+        event.setId(generatedId);
+        
+        return event;
+        
     }
 
     @Override
@@ -113,28 +155,75 @@ public class TripDbDao implements TripDao {
     }
 
     @Override
-    public List<Event> getEventsByDate(LocalDate date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Event> getEventsByWeek(List<LocalDate> week) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<Event> getEventsByTrip(int tripId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String select = "SELECT * FROM Events WHERE TripId = ?";
+        
+       return jdbc.query(select, new EventMapper(), tripId);
     }
 
     @Override
     public void updateEvent(Event event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String update = "UPDATE Event SET `name` = ?, starttime = ?, endtime = ?, "
+                + "location = ?, description = ?, categoryid = ?, transportid = ?, tripid = ?";
+        
+                    int categoryId = -1;
+        
+                    if(event.getCategory() == Category.transportation) categoryId = 1;
+                    if(event.getCategory() == Category.hotelReservation) categoryId = 2;
+                    if(event.getCategory() == Category.attraction) categoryId = 3;
+                    if(event.getCategory() == Category.meal) categoryId = 4;
+                    if(event.getCategory() == Category.freeTime) categoryId = 5;
+        
+        
+        jdbc.update(update, event.getName(), event.getStartTime(), event.getEndTime(),
+                    event.getLocation(), event.getDescription(), categoryId, 
+                    event.getTransportationId(), event.getTripId());
+
     }
 
     @Override
-    public void deleteEvent(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteEvent(int id) throws DaoException {
+        String delete = "DELETE * FROM Event WHERE id = ?";
+        
+      int rowsAffected = jdbc.update(delete, id);
+      
+      if( rowsAffected != 1 ) {
+          throw new DaoException("Delete process failed.");
+      }
+        
+    }
+
+    @Override
+    public List<Event> getEventsByDate(LocalDate date, int tripId) {
+        String select = "Select *\n" +
+                        "from Event\n" +
+                        "where TripId = ? AND cast(StartTime as date) = ?;";
+
+        return jdbc.query(select, new EventMapper(), tripId, date);
+        
+    }
+
+    @Override
+    public List<Event> getEventsByWeek(List<LocalDate> week, int tripId) {
+        String select = "Select *\n" +
+                        "from Event\n" +
+                        "where TripId = ? AND cast(StartTime as date) = ?;";
+        
+        List<Event> eventsByWeek = new ArrayList();
+
+        for(LocalDate date : week){
+            
+         List<Event> eventsPerDay = new ArrayList();
+                 
+                 eventsPerDay = jdbc.query(select, new EventMapper(), tripId, date);
+                 
+                 for(Event event : eventsPerDay){
+                     eventsByWeek.add(event);
+                 }
+        }
+        
+        return eventsByWeek;
+
     }
 
 
