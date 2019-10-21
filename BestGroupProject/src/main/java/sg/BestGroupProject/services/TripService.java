@@ -202,11 +202,16 @@ public class TripService {
     }
     
     public Response deleteEvent(int id){
-        Response response = new Response();
-        
-        tDao.deleteEvent(id);
-        response.setSuccess(true);
-        
+         Response response = new Response();
+         
+        try {
+            tDao.deleteEvent(id);
+            response.setSuccess(true);
+            
+            
+        } catch (DaoException ex) {
+            response.setMessage(ex.getMessage());
+        }
         return response;
     }
     

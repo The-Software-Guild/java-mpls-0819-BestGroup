@@ -38,7 +38,7 @@ public class AdminController {
     }
     
     @PostMapping("/addUser")
-    public String addUser(String username, String password) {
+    public String addUser(String username, String password, Integer tripId) {
         SiteUser user = new SiteUser();
         user.setUsername(username);
         user.setPassword(encoder.encode(password));
@@ -48,7 +48,7 @@ public class AdminController {
         userRoles.add(users.getRoleByRole("ROLE_USER"));
         user.setRoles(userRoles);
         
-        users.createUser(user);
+        users.createUser(user, tripId);
         
         return "redirect:/admin";
     }
