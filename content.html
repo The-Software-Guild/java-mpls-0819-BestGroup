@@ -16,7 +16,7 @@
         .month {
             padding: 70px 25px;
             width: 100%;
-            background:burlywood;
+            background: burlywood;
             text-align: center;
         }
 
@@ -54,7 +54,7 @@
 
         .weekdays li {
             display: inline-block;
-            width: 13.6%;
+            width: 11.6%;
             color: #666;
             text-align: center;
         }
@@ -101,6 +101,7 @@
         #nav {
             background-color: burlywood;
             border-radius: 10px;
+            height: 800px;
         }
 
         #menu {
@@ -115,11 +116,96 @@
         }
 
         #calender {
-            width: 300px;
+            width: 400px;
             height: 100px;
             border-radius: 5px;
             float: right;
         }
+
+        .nav {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 800px;
+            z-index: 9999;
+        }
+
+        .nav__container {
+            position: absolute;
+            top: 250px;
+            left: 0;
+            width: 100%;
+            height: 800px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 25px;
+            
+        }
+
+        html {
+            /* For desktop */
+            overflow: hidden;
+        }
+
+        body {
+            overflow: visible;
+            height: 100%;
+        }
+
+        /* Popup container */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
     </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -179,71 +265,114 @@
                 <p>
                     This is only visible to users who also have the ADMIN role.
                 </p>
-                <div class="container">
-                        <div class="col-md-3" id="menu">
-                            <h2>Events</h2>
 
+                <!-- <nav class="nav">
+                        <div class="nav__container">
+                                <div class="col-md-3" id="menu">
+                                        <h2>events</h2>
+                                    </div>
+                        </div>
+                    </nav> -->
+
+              
+                        
+
+
+
+                        
+
+                    
                     </div>
-                    </div>
+
+                    <form action="signUp" method="POST">
+                        Username: <input type="text" name="username"/> <br/>
+                        Password: <input type="text" name="password"/><br/>
+                        First Name:<input type="text" name="firstName"/><br/>
+                        Last Name:<input type="text" name="lastName"/><br/>
+                        School Name:<input type="text" name="schoolName"/><br/>
+                        Emergency Contact Name:<input type="text" name= emergencyContactName/><br/>
+                        Emergency Contact Phone:<input type="text" name=" emergencyContactPhone"/><br/>
+                    
+
+                        <button type="submit">Submit</button>
+                    </form>
+                  
+                       
+                     
+
                     <div class = "container" id = "calender">
+                            <div class="popup" onclick="myFunction()">
+                                    <span class="popuptext" id="myPopup">Popup text...</span>
                     <div class="month">
                             <ul>
                               <li class="prev">&#10094;</li>
                               <li class="next">&#10095;</li>
-                              <li>August<br><span style="font-size:18px">2017</span></li>
+                              <li>October<br><span style="font-size:18px">2019</span></li>
                             </ul>
                           </div>
                           
                           <ul class="weekdays">
+                             
                             <li>Mo</li>
                             <li>Tu</li>
                             <li>We</li>
                             <li>Th</li>
                             <li>Fr</li>
                             <li>Sa</li>
-                            <li>Su</li>
+                            <li>Su</li> 
+                            
                           </ul>
                           
                           <ul class="days">
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                            <li>4</li>
-                            <li>5</li>
-                            <li>6</li>
-                            <li>7</li>
-                            <li>8</li>
-                            <li>9</li>
-                            <li><span class="active">10</span></li>
-                            <li>11</li>
-                            <li>12</li>
-                            <li>13</li>
-                            <li>14</li>
-                            <li>15</li>
-                            <li>16</li>
-                            <li>17</li>
-                            <li>18</li>
-                            <li>19</li>
-                            <li>20</li>
-                            <li>21</li>
-                            <li>22</li>
-                            <li>23</li>
-                            <li>24</li>
-                            <li>25</li>
-                            <li>26</li>
-                            <li>27</li>
-                            <li>28</li>
-                            <li>29</li>
-                            <li>30</li>
+                            <li><a th:href= "${'/content?day=1&tripId=' + trip.id}">1</a></li>
+                            <li><a th:href= "${'/content?day=2&tripId=' + trip.id}">2</a></li>
+                            <li><a th:href= "${'/content?day=3&tripId=' + trip.id}">3</a></li>
+                            <li><a th:href= "${'/content?day=4&tripId=' + trip.id}">4</a></li>
+                            <li><a th:href= "${'/content?day=5&tripId=' + trip.id}">5</a></li>
+                            <li><a th:href= "${'/content?day=6&tripId=' + trip.id}">6</a></li>
+                            <li><a th:href= "${'/content?day=7&tripId=' + trip.id}">7</a></li>
+                            <li><a th:href= "${'/content?day=8&tripId=' + trip.id}">8</a></li>
+                            <li><a th:href= "${'/content?day=9&tripId=' + trip.id}">9</a></li>
+                            <li><a th:href= "${'/content?day=10&tripId=' + trip.id}">10</a></li>
+                            <li><a th:href= "${'/content?day=11&tripId=' + trip.id}">11</a></li>
+                            <li><a th:href= "${'/content?day=12&tripId=' + trip.id}">12</a></li>
+                            <li><a th:href= "${'/content?day=13&tripId=' + trip.id}">13</a></li>
+                            <li><a th:href= "${'/content?day=14&tripId=' + trip.id}">14</a></li>
+                            <li><a th:href= "${'/content?day=15&tripId=' + trip.id}">15</a></li>
+                            <li><a th:href= "${'/content?day=16&tripId=' + trip.id}">16</a></li>
+                            <li><a th:href= "${'/content?day=17&tripId=' + trip.id}">17</a></li>
+                            <li><a th:href= "${'/content?day=18&tripId=' + trip.id}">18</a></li>
+                            <li><a th:href= "${'/content?day=19&tripId=' + trip.id}">19</a></li>
+                            <li><a th:href= "${'/content?day=20&tripId=' + trip.id}">20</a></li>
+                            <li><a th:href= "${'/content?day=21&tripId=' + trip.id}">21</a></li>
+                            <li><a th:href= "${'/content?day=22&tripId=' + trip.id}">22</a></li>
+                            <li><a th:href= "${'/content?day=23&tripId=' + trip.id}">23</a></li>
+                            <li><a th:href= "${'/content?day=24&tripId=' + trip.id}">24</a></li>
+                            <li><a th:href= "${'/content?day=25&tripId=' + trip.id}">25</a></li>
+                            <li><a th:href= "${'/content?day=26&tripId=' + trip.id}">26</a></li>
+                            <li><a th:href= "${'/content?day=27&tripId=' + trip.id}">27</a></li>
+                            <li><a th:href= "${'/content?day=28&tripId=' + trip.id}">28</a></li>
+                            <li><a th:href= "${'/content?day=29&tripId=' + trip.id}">29</a></li>
+                            <li><a th:href= "${'/content?day=30&tripId=' + trip.id}">30</a></li>
                           </ul>
                         </div> 
+                    </div>
             </div>
-        </div>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="js/content.js"></script> 
+        
+
+        <script>  
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
+ 
     </body>
 </html>

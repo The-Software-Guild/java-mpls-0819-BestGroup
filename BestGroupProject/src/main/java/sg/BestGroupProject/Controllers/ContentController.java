@@ -15,8 +15,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ContentController {
 
-    @GetMapping("/content")
-    public String displayContentPage() {
-        return "content";
-    }
+//    @GetMapping("/content")
+//    public String displayContentPage(Integer day, Integer tripId, Model model) {
+//      List<Event> events = new ArrayList<>();
+//      call getTripById 
+//       put the trip in model
+//        getEventsByDate();
+//       do check to see if day is not null
+//    
+//      model.addAttribute("eventsList" events);
+//    
+//        
+//        return "content";
+//    }
 }
