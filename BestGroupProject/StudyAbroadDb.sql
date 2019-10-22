@@ -1,7 +1,7 @@
-drop database if exists StudyAbroadDb;
-create database StudyAbroadDb;
+drop database if exists StudyAbroadTest;
+create database StudyAbroadTest;
 
-use StudyAbroadDb;
+use StudyAbroadTest;
 
 
 
@@ -71,3 +71,11 @@ insert into `role`(`id`,`role`)
     
 insert into `user_role`(`user_id`,`role_id`)
     values(1,1),(1,2),(2,2);
+    
+INSERT INTO category (id, `name`)
+VALUES
+(1, "transportation"),
+(2, "hotelReservation"),
+(3, "attraction"),
+(4, "meal"),
+(5, "freetime");

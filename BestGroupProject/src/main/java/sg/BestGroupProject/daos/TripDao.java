@@ -19,7 +19,7 @@ public interface TripDao {
     
     int createTrip(Trip trip) throws DaoException;
     Trip getTripById (int id) throws DaoException;
-    void updatedTrip (Trip trip);
+    void updateTrip (Trip trip);
     Event addEvent (Event event);
     Event getEventById (int id) throws DaoException;
     List<Event> getEventsByDate (LocalDate date, int tripId);
@@ -27,5 +27,6 @@ public interface TripDao {
     List<Event> getEventsByTrip (int tripId);
     void updateEvent (Event event);
     void deleteEvent (int id) throws DaoException;
+    List<Trip> getTripsByUser (int userId);
     
 }
