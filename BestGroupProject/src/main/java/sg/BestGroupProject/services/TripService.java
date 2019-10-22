@@ -214,5 +214,13 @@ public class TripService {
         }
         return response;
     }
+
+    public Response<List<Trip>> getTripsByUser(int userId) {
+        Response response = new Response();
+        
+        
+        
+        return response;
+    }
     
 }

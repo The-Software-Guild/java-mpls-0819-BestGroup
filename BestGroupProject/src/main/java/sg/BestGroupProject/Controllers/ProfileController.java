@@ -17,24 +17,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import sg.BestGroupProject.daos.UserDao;
 import sg.BestGroupProject.models.Role;
 import sg.BestGroupProject.models.SiteUser;
+import sg.BestGroupProject.models.Trip;
+import sg.BestGroupProject.services.Response;
+import sg.BestGroupProject.services.TripService;
 
 /**
  *
  * @author ddubs
  */
 @Controller
-public class AdminController {
+public class ProfileController {
 
     @Autowired
     UserDao users;
     
     @Autowired
+    TripService trip;
+    
+    @Autowired
     PasswordEncoder encoder;
     
-    @GetMapping("/admin")
-    public String displayAdminPage(Model model) {
+    @GetMapping("/profile")
+    public String displayProfilePage(Model model, Integer userId) {
+        Response<List<Trip>> tResponse = trip.getTripsByUser(userId);
+        List<Trip> trips = tResponse.getData();
+        model.addAttribute(trips);
         model.addAttribute("users", users.getAllUsers());
-        return "admin";
+        
+        return "profile";
     }
     
     @PostMapping("/addUser")
