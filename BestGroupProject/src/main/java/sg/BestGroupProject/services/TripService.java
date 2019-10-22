@@ -90,7 +90,7 @@ public class TripService {
         } else if (trip.getTeachers().isEmpty()) {
             response.setMessage("Please add a teacher to the trip");
         } else {
-            tDao.updatedTrip(trip);
+            tDao.updateTrip(trip);
             response.setSuccess(true);
         }
         
@@ -202,16 +202,15 @@ public class TripService {
     }
     
     public Response deleteEvent(int id){
-         Response response = new Response();
-         
-        try {
-            tDao.deleteEvent(id);
-            response.setSuccess(true);
-            
-            
-        } catch (DaoException ex) {
-            response.setMessage(ex.getMessage());
-        }
+
+        Response response = new Response();
+        try{
+        tDao.deleteEvent(id);
+        response.setSuccess(true);
+         } catch (DaoException ex) {
+                response.setMessage(ex.getMessage());
+            }
+   
         return response;
     }
 
