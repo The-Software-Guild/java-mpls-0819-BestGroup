@@ -5,12 +5,25 @@
  */
 package sg.BestGroupProject.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
+
 /**
  *
  * @author cas
  */
 public enum Category {
-    
-    transportation, hotelReservation, attraction, meal, freeTime
-    
+
+    transportation, hotelReservation, attraction, meal, freeTime;
+
+    public List<Category> getAllCategories() {
+        EnumSet<Category> categories = EnumSet.allOf(Category.class);
+
+        List<Category> categoriesList = new ArrayList<>(categories);
+
+        return categoriesList;
+    }
+
 }

@@ -27,6 +27,6 @@ public interface TripDao {
     List<Event> getEventsByTrip (int tripId);
     void updateEvent (Event event);
     void deleteEvent (int id) throws DaoException;
-    List<Trip> getTripsByUser (int userId);
+    List<Trip> getTripsByUser (int userId)throws DaoException;
     
 }

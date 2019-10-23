@@ -5,8 +5,13 @@
  */
 package sg.BestGroupProject.Controllers;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import sg.BestGroupProject.models.Category;
 
 /**
  *
@@ -28,4 +33,14 @@ public class ContentController {
 //        
 //        return "content";
 //    }
+    @GetMapping("/addEvent")
+    public String retrieveCategories(Model model){
+        EnumSet<Category> categories = EnumSet.allOf(Category.class);
+
+        List<Category> categoriesList = new ArrayList<>(categories);
+        model.addAttribute("categories", categories);
+        
+        return "categories";
+    }
+    
 }

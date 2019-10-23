@@ -59,15 +59,15 @@ public class AdminController {
         return "redirect:/admin";
     }
     
-    @GetMapping("/editUser")
-    public String editUserDisplay(Model model, Integer id) {
-        SiteUser user = users.getUserById(id);
-        List<Role> roleList = users.getAllRoles();
-        
-        model.addAttribute("user", user);
-        model.addAttribute("roles", roleList);
-        return "editUser";
-    }
+//    @GetMapping("/editUser")
+//    public String editUserDisplay(Model model, Integer id) {
+//        SiteUser user = users.getUserById(id);
+//        List<Role> roleList = users.getAllRoles();
+//        
+//        model.addAttribute("user", user);
+//        model.addAttribute("roles", roleList);
+//        return "editUser";
+//    }
     
     @PostMapping(value="/editUser")
     public String editUserAction(String[] roleIdList, Boolean enabled, Integer id) {
