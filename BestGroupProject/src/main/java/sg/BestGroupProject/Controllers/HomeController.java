@@ -5,8 +5,11 @@
  */
 package sg.BestGroupProject.Controllers;
 
+import java.util.EnumSet;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import sg.BestGroupProject.models.Category;
 
 /**
  *
@@ -19,6 +22,15 @@ public class HomeController {
     public String displayHomePage() {
 
         return "home";
+    }
+
+    @GetMapping("/addEvent")
+    public String displayAddEvent(Model model) {
+        EnumSet<Category> categories = EnumSet.allOf(Category.class);
+
+        model.addAttribute("categories", categories);
+
+        return "addEvent";
     }
 
 }
