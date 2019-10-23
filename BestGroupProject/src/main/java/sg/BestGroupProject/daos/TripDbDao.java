@@ -245,10 +245,14 @@ public class TripDbDao implements TripDao {
     }
 
     @Override
-    public List<Trip> getTripsByUser(int userId) {
+    public List<Trip> getTripsByUser(int userId) throws DaoException {
         String select = "SELECT FROM usertrip where userid = ?";
-        
+        try{
         return jdbc.query(select, new TripMapper(), userId);
+        }catch(DataAccessException ex) {
+            throw new DaoException("User with ID: " + userId + " does not exist.");       
+        }
+        
 
     }
 

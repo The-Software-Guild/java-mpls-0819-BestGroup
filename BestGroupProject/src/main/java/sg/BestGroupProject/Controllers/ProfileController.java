@@ -69,7 +69,6 @@ public class ProfileController {
         return "redirect:/admin";
     }
     
-    
     @PostMapping(value="/editUser")
     public String editUserAction(String[] roleIdList, Boolean enabled, Integer id) {
         SiteUser user = users.getUserById(id);
