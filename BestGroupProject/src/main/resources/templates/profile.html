@@ -12,13 +12,13 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-        <title>Hello Security: Admin</title>
+        <title>Profile</title>
     </head>
     <body>
         <div class="container">
-            <h1>Hello Security</h1>
+            <h1>Welcome</h1>
             <hr/>
-            <div class="navbar">
+<!--            <div class="navbar">
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="nav-item">
                         <a class="nav-link" href="home">
@@ -36,8 +36,8 @@
                         </a>
                     </li>
                 </ul>    
-            </div>
-            <h2>Admin Page</h2>
+            </div>-->
+            <h2>Profile</h2>
             
             <div sec:authorize="isAuthenticated()">
                 <form class="form-inline" 
@@ -55,10 +55,19 @@
                           type="submit">Logout</button>
                 </form>
             </div>
-            
-            <p>
-                Only users with the ADMIN role can see this page.
-            </p>
+            <div class="container">
+                <h2>Your Trips</h2>
+                <table>
+                    <tr>
+                        <th>Trip name</th>
+                    </tr>
+                    <tr th:each="trip : ${trips}">
+                        <td th:href="@{/tripHome(id=${trip.id})}">
+                            <a th:text="${trip.name}"></a></td>
+                    </tr>
+                </table>
+            </div>
+
         </div>
         <div class="container">
             <div class ="row">
