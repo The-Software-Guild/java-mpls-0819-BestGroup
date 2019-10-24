@@ -5,10 +5,16 @@
  */
 package sg.BestGroupProject.models;
 
+import java.time.LocalDate;
+import java.util.List;
+
 /**
  *
  * @author cas
  */
 public class DayOfActivity {
+    
+    List<Event> events;
+    LocalDate date;
     
 }
