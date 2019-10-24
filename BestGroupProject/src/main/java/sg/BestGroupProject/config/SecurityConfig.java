@@ -26,11 +26,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService service;
     
+    @Autowired
+    public void configureGlobalInMemory(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .inMemoryAuthentication()
+                .withUser("user").password("{noop}password").roles("USER")
+                .and()
+                .withUser("admin").password("{noop}password").roles("ADMIN", "USER");
+    }
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http    
                 .authorizeRequests()
-                    .antMatchers("/admin").hasRole("ADMIN")
+                    .antMatchers("/addEvent").hasRole("ADMIN")
+                    .antMatchers("/addTrip").hasRole("ADMIN")
                     .antMatchers("/", "/home").permitAll()
                     .antMatchers("/css/**", "/js/**", "/fonts/**").permitAll()
                     .anyRequest().hasRole("USER")

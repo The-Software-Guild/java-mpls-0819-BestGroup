@@ -1,7 +1,7 @@
-drop database if exists StudyAbroadTest;
-create database StudyAbroadTest;
+drop database if exists StudyAbroadtest;
+create database StudyAbroadtest;
 
-use StudyAbroadTest;
+use StudyAbroadtest;
 
 
 
@@ -67,7 +67,7 @@ insert into `user`(`id`,`username`,`password`,`enabled`)
         (2,"user","$2a$10$MYKoD5hXMPWABFYbgDkBy.HEwnwpcYzqSeog/ofBba7ahRkfFoGOi",true);
 
 insert into `role`(`id`,`role`)
-    values(1,"Teacher"), (2,"Student");
+    values(1,"ROLE_ADMIN"), (2,"ROLE_USER");
     
 insert into `user_role`(`user_id`,`role_id`)
     values(1,1),(1,2),(2,2);

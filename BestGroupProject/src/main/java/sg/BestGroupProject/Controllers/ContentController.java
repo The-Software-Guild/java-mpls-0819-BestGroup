@@ -54,15 +54,20 @@ public class ContentController {
     }
     
     
+<<<<<<< HEAD
 
     @GetMapping("/addEvent")
     public String retrieveCategories(Model model){
         EnumSet<Category> categories = EnumSet.allOf(Category.class);
+=======
+//     @PostMapping("signUp")
+//    public String signUpForm(HttpServletRequest request) {
+//        username = request.getParameter("formFirstName");
+//         = Integer.parseInt(request.getParameter(""));
+//        
+//        return "redirect:/singnUp";
+//    }
+>>>>>>> c1c75798c14f92a52642c157c396232c38668a22
 
-        List<Category> categoriesList = new ArrayList<>(categories);
-        model.addAttribute("categories", categories);
-        
-        return "categories";
-    }
     
 }
