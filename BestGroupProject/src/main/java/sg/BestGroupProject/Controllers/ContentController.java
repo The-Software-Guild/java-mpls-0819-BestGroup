@@ -52,6 +52,4 @@ public class ContentController {
         
         return "content";
     }
-        
-    
 }
