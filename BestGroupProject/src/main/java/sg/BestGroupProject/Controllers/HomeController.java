@@ -24,13 +24,4 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/addEvent")
-    public String displayAddEvent(Model model) {
-        EnumSet<Category> categories = EnumSet.allOf(Category.class);
-
-        model.addAttribute("categories", categories);
-
-        return "addEvent";
-    }
-
 }
