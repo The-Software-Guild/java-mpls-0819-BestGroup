@@ -44,4 +44,7 @@ public class DayOfActivity {
         this.day = day;
     }
     
+    List<Event> events;
+    LocalDate date;
+    
 }

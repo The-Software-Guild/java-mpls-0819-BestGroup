@@ -18,12 +18,14 @@ public enum Category {
 
     transportation, hotelReservation, attraction, meal, freeTime;
 
-    public List<Category> getAllCategories() {
-        EnumSet<Category> categories = EnumSet.allOf(Category.class);
-
-        List<Category> categoriesList = new ArrayList<>(categories);
-
-        return categoriesList;
     }
+    
+    
+//    public List<Category> getAllCategories() {
+//        EnumSet<Category> categories = EnumSet.allOf(Category.class);
+//
+//        List<Category> categoriesList = new ArrayList<>(categories);
+//
+//        return categoriesList;
+//    }
 
-}

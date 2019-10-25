@@ -53,22 +53,4 @@ public class ContentController {
         return "content";
     }
     
-    
-//     @PostMapping("signUp")
-//    public String signUpForm(HttpServletRequest request) {
-//        username = request.getParameter("formFirstName");
-//         = Integer.parseInt(request.getParameter(""));
-//        
-//        return "redirect:/singnUp";
-//    }
-    @GetMapping("/addEvent")
-    public String retrieveCategories(Model model){
-        EnumSet<Category> categories = EnumSet.allOf(Category.class);
-
-        List<Category> categoriesList = new ArrayList<>(categories);
-        model.addAttribute("categories", categories);
-        
-        return "categories";
-    }
-    
 }
