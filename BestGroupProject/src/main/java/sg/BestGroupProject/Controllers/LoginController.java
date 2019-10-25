@@ -20,4 +20,12 @@ public class LoginController {
         return "login";
     }
 
+    
+    //     @PostMapping("/signUp")
+//    public String signUpForm(HttpServletRequest request) {
+//        username = request.getParameter("formFirstName");
+//         = Integer.parseInt(request.getParameter(""));
+//        
+//        return "redirect:/singnUp";
+//    }
 }
