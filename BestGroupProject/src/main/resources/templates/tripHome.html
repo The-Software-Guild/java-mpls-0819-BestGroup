@@ -24,19 +24,20 @@
                             </div>
                             <div class="row-md-8" id="week" th:each="dayEvents : ${daysList}">
                                 <div class="col" style="display: table-cell; width: 14%; 
-                                     background-color: lightgrey; border-radius: 15px; border-style: solid">
+                                     background-color: lightgrey; border-radius: 10px; border-style: solid">
                                     <div class="day" style="background-color: #b2d0f9; 
                                          text-align: center; width: 100%; border-radius: 10px; 
                                          margin: 5px; border-style: solid" th:text="${#temporals.dayOfWeekName(dayEvents.day)}"></div>
-                                    <button class="dayEvents" style="text-align: center; 
+                                    <button class="dayEvents" th:href="@{/showEvent/ + ${event.id}" th:value="${event.id}" style="text-align: center; 
                                             width: 100%; background-color: #b2d0f9;
                                             border-radius: 10px" th:each="event : ${dayEvents.events}">
-                                        <div><a th:text="{event.name}"></a>
-                                            <a th:text="{event.startTime}"></a>
-                                            <a th:text="{event.location}"></a></div>
+                                        <div><a th:text="${event.name}"></a>
+                                            <a th:text="${event.startTime}"></a>
+                                            <a th:text="${event.location}"></a><hr/></div>
                                     </button>
                                 </div>
                             </div>
+                        </div>
 
 
                             <!-- Optional JavaScript -->
