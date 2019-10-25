@@ -8,13 +8,13 @@ package sg.BestGroupProject.Controllers;
 import java.time.LocalDate;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import sg.BestGroupProject.models.DayOfActivity;
 import sg.BestGroupProject.models.Event;
 import sg.BestGroupProject.models.Trip;
@@ -31,8 +31,11 @@ public class TripController {
     @Autowired
     TripService tripService;
 
-    @GetMapping("/tripHome")
-    public String displayContentPage(LocalDate day, Integer tripId, Model model) {
+    @GetMapping("/tripHome/{tripId}")
+    public String displayContentPage(@PathVariable Integer tripId, Model model) {
+        
+        Response<Trip> trip = tripService.getTripById(tripId);
+        LocalDate day = trip.getData().getStartDate();
         TemporalField field = WeekFields.of(Locale.getDefault()).dayOfWeek();
         LocalDate date = day.with(field, 1);
         
@@ -53,8 +56,8 @@ public class TripController {
         return "tripHome";
     }
     
-    @GetMapping("/showEvent")
-    public String displayEvent(Integer eventId, Model model){
+    @GetMapping("/showEvent/{eventId}")
+    public String displayEvent(@PathVariable Integer eventId, Model model){
         Response<Event> response = tripService.getEventById(eventId);
         
         model.addAttribute("event", response.getData());

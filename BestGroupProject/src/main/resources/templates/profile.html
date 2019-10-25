@@ -57,13 +57,19 @@
             </div>
             <div class="container">
                 <h2>Your Trips</h2>
+                <div class="container">
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <p>
+                    <button href="/addTrip">Add a Trip</button>
+                </p>
+            </div>
+                </div>
                 <table>
                     <tr>
                         <th>Trip name</th>
                     </tr>
                     <tr th:each="trip : ${trips}">
-                        <td th:href="@{/tripHome(id=${trip.id})}">
-                            <a th:text="${trip.name}"></a></td>
+                        <td><button th:href="@{/tripHome/'+ ${trip.id}" th:text="${trip.name}"></button></td>
                     </tr>
                 </table>
             </div>

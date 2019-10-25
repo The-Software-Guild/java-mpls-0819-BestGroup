@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      >
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+                <style>
+                    #map {
+                        height: 100%;
+                    }
+                    html, body {
+                        height: 100%;
+                        margin: 0;
+                        padding: 0;
+                    }
+                </style>
+
+                <!-- Bootstrap CSS -->
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+                    <title>Event</title>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <div class="row-md-4">
+                                <p>Logo</p>
+                                <p>Title</p>
+                                <p>Tabs</p>
+                                <p>Other shit</p>
+                            </div>
+                            <div class="col-md-4" style="display: table-cell; width: 14%; 
+                                 background-color: lightgrey; border-radius: 10px; border-style: solid">
+                                <div class="day" style="background-color: #b2d0f9; 
+                                     text-align: center; width: 100%; border-radius: 10px; 
+                                     margin: 5px; border-style: solid" th:text="${#temporals.dayOfWeekName(event.startTime)}"></div>
+                                <div class="dayEvents" th:href="${'/showEvent?eventId=' + event.id}" style="text-align: center; 
+                                     width: 100%; background-color: #b2d0f9;
+                                     border-radius: 10px">
+                                    <div><a th:text="${event.name}"></a><hr/>
+                                        <a th:text="${event.startTime}"></a><hr/>
+                                        <a th:text="${event.location}"></a><hr/>
+                                    <a th:text="${event.description}"></a><hr/>
+                                    <a th:text="${event.endTime}"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8" id="map"></div>
+                        </div>
+
+
+                        <!-- Optional JavaScript -->
+                        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+                        <script th:inline="javascript">
+                            var geocoder;
+                            var map;
+                            function initialize() {
+                                geocoder = new google.maps.Geocoder();
+                                var eventAddress = /*[[${event.location}]]*/ "";
+                                var mapOptions = {
+                                    zoom: 8,
+                                    address: eventAddress
+                                }
+
+                                function initMap() {
+                                    map = new google.maps.Map(document.getElementById('map', mapOptions));
+                                }
+                            }
+
+                        </script>
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBilPgATIlIyfCUgd9MTjyPzWcs5xjH6yw&callback=initMap"
+                        async defer></script>
+                    </body>
+
+                    </body>
+                    </html>
