@@ -75,11 +75,12 @@ public class TripController {
 //        
 //        return "redirect:/singnUp";
 //    }
-    @GetMapping("/addEvent")
-    public String displayAddEvent(Model model) {
+    @GetMapping("/addEvent/{tripId}")
+    public String displayAddEvent(@PathVariable Integer tripId, Model model) {
         EnumSet<Category> categories = EnumSet.allOf(Category.class);
 
         model.addAttribute("categories", categories);
+        model.addAttribute("tripId", tripId);
 
         return "addEvent";
     }
