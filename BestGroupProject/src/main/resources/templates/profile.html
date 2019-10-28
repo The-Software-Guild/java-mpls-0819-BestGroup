@@ -60,7 +60,7 @@
                 <div class="container">
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <p>
-                    <button href="/addTrip">Add a Trip</button>
+                    <button onclick="location.href='addTrip'" type="submit">Add a Trip</button>
                 </p>
             </div>
                 </div>
@@ -69,7 +69,7 @@
                         <th>Trip name</th>
                     </tr>
                     <tr th:each="trip : ${trips}">
-                        <td><button th:href="@{/tripHome/'+ ${trip.id}" th:text="${trip.name}"></button></td>
+                        <td><a class="btn" style="background-color: lightgrey; border-radius: 10px" th:href="@{/tripHome/{id}(id=${trip.id})}" th:text="${trip.name}"></a></td>
                     </tr>
                 </table>
             </div>

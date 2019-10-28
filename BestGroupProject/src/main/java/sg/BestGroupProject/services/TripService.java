@@ -217,7 +217,15 @@ public class TripService {
     }
 
     public Response<List<Trip>> getTripsByUser(int userId) {
-        Response response = new Response();
+        Response<List<Trip>> response = new Response();
+        
+        try {
+            List<Trip> trip = tDao.getTripsByUser(userId);
+            response.setData(trip);
+            response.setSuccess(true);
+        } catch (DaoException ex) {
+            response.setMessage(ex.getMessage());
+        }
 
         return response;
     }
@@ -233,10 +241,12 @@ public class TripService {
             events.sort((Event e1, Event e2) -> e1.getStartTime().compareTo(e2.getStartTime()));
             day.setDay(newDay);
             day.setEvents(events);
+            day.setTripId(tripId);
             days.add(day);
         }
 
         days.sort((DayOfActivity d1, DayOfActivity d2) -> d1.getDay().compareTo(d2.getDay()));
+        
         response.setSuccess(true);
         response.setData(days);
         
