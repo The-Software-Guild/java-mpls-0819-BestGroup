@@ -9,10 +9,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import sg.BestGroupProject.daos.UserDao;
 import sg.BestGroupProject.models.Role;
@@ -38,10 +41,12 @@ public class ProfileController {
     PasswordEncoder encoder;
     
     @GetMapping("/profile")
-    public String displayProfilePage(Model model, Integer userId) {
-        Response<List<Trip>> tResponse = trip.getTripsByUser(userId);
+    public String displayProfilePage(Model model) {
+        String userName = ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        SiteUser user = users.getUserByUsername(userName);
+        Response<List<Trip>> tResponse = trip.getTripsByUser(user.getId());
         List<Trip> trips = tResponse.getData();
-        model.addAttribute(trips);
+        model.addAttribute("trips", trips);
         model.addAttribute("users", users.getAllUsers());
         
         return "profile";

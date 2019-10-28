@@ -15,6 +15,7 @@ import java.util.List;
 public class DayOfActivity {
     private List<Event> events;
     private LocalDate day;
+    private int tripId;
 
     /**
      * @return the events
@@ -42,6 +43,20 @@ public class DayOfActivity {
      */
     public void setDay(LocalDate day) {
         this.day = day;
+    }
+
+    /**
+     * @return the tripId
+     */
+    public int getTripId() {
+        return tripId;
+    }
+
+    /**
+     * @param tripId the tripId to set
+     */
+    public void setTripId(int tripId) {
+        this.tripId = tripId;
     }
     
   
