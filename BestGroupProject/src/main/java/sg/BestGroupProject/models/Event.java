@@ -6,14 +6,16 @@
 package sg.BestGroupProject.models;
 
 import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
  * @author cas
  */
 public class Event {
-    
+    @DateTimeFormat
     private LocalDateTime startTime;
+    @DateTimeFormat
     private LocalDateTime endTime;
     private Category category;
     private String location;

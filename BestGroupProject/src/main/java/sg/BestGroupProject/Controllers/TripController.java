@@ -6,13 +6,16 @@
 package sg.BestGroupProject.Controllers;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import sg.BestGroupProject.daos.UserDao;
 import sg.BestGroupProject.models.Category;
 import sg.BestGroupProject.models.DayOfActivity;
@@ -91,29 +95,29 @@ public class TripController {
         return "addEvent";
     }
 
-    @PostMapping("/addEvent")
-    public String addEvent(Event toAdd) {
+    @PostMapping("/tripHome/addEvent/addEvent")
+    public String addEvent(HttpServletRequest request, Event toAdd) {
 //        String name = request.getParameter("name");
 //        String location = request.getParameter("location");
-//        String startTime = request.getParameter("starttime");
-//        String endTime = request.getParameter("endtime");
-//        String description = request.getParameter("description");
-//        String categoryId = request.getParameter("categoryId");
-//        String transportationId = request.getParameter("TransportationId");
-//
-//        Event event = new Event();
-//        event.setName(name);
-//        event.setLocation(location);
-//        event.setDescription(description);
-//        event.setStartTime(LocalDateTime.parse(startTime));
-//        event.setEndTime(LocalDateTime.parse(endTime));
+//        String startTime = request.getParameter("startTime");
+//        String endTime = request.getParameter("endTime");
+////        String description = request.getParameter("description");
+////        String categoryId = request.getParameter("categoryId");
+////        String transportationId = request.getParameter("TransportationId");
+////
+////        Event event = new Event();
+////        event.setName(name);
+////        event.setLocation(location);
+////        event.setDescription(description);
+//        toAdd.setStartTime(LocalDateTime.parse(startTime));
+//        toAdd.setEndTime(LocalDateTime.parse(endTime));
 //        event.setCategory(Category.valueOf(categoryId));
 //        event.setTransportationId(transportationId);
         
         tripService.addEvent(toAdd);
         
 
-        return "redirect:/";
+        return "redirect:/tripHome";
     }
     
     @GetMapping("/addTrip")
