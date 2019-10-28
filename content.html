@@ -8,10 +8,7 @@
             list-style-type: none;
         }
 
-        body {
-            font-family: Verdana, sans-serif;
-        }
-
+    
         /* Month header */
         .month {
             padding: 70px 25px;
@@ -88,20 +85,34 @@
 
         }
 
-        #iphone {
-            border-radius: 10px;
-
-        }
-
         #body {
-            background-color: cornflowerblue;
+            background-image: url("https://cdn.pixabay.com/photo/2016/07/28/16/01/office-1548294_1280.jpg");
             font-family: Verdana;
+
         }
 
-        #nav {
+        /* div.transbox {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.8;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+
+            .nav-link{
+                background-color: burlywood;
+                font-style: italic;
+                color: black;
+                height: 60px;
+            }
+        #navLife {
             background-color: burlywood;
-            border-radius: 10px;
-            height: 800px;
+            height: 60px;
+            width:initial;
+            border-radius: 5px;
+           
+            opacity: 0.8;
+            filter: alpha(opacity=60);
+            /* For IE8 and earlier */
         }
 
         #menu {
@@ -116,12 +127,14 @@
         }
 
         #calender {
-            width: 400px;
-            height: 100px;
-            border-radius: 5px;
+            margin-top: 20px;
+            width: 450px;
+            height: 200px;
+    
             float: right;
         }
 
+     
         .nav {
             display: block;
             position: fixed;
@@ -137,75 +150,13 @@
             top: 250px;
             left: 0;
             width: 100%;
-            height: 800px;
+            height: 100px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             margin-bottom: 25px;
-            
+
         }
 
-        html {
-            /* For desktop */
-            overflow: hidden;
-        }
-
-        body {
-            overflow: visible;
-            height: 100%;
-        }
-
-        /* Popup container */
-.popup {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-/* The actual popup (appears on top) */
-.popup .popuptext {
-  visibility: hidden;
-  width: 160px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
-}
     </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -215,12 +166,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Hello Security: Content</title>
+    <title>Study Abroad</title>
 </head>
 
 <body id="body">
-    <div class="container">
-        <h1>Hello Security</h1>
+    <div class="container" id=navLife>
+        <h1>Study Abroad</h1>
         <hr />
         <div class="navbar">
             <ul class="nav nav-tabs">
@@ -230,7 +181,7 @@
                     </a>
                 </li>
                 <li role="presentation" class="nav-item">
-                    <a class="nav-link active" href="content">
+                    <a class="nav-link" href="content">
                         Content (must have the user role)
                     </a>
                 </li>
@@ -241,7 +192,6 @@
                 </li>
             </ul>
         </div>
-        <h2>Content Page</h2>
 
         <div sec:authorize="isAuthenticated()">
             <form class="form-inline" method="POST" action="/logout">
@@ -258,14 +208,20 @@
             
             
             <p>
-                Only users with the USER role can see this page.
+                <!-- Only users with the USER role can see this page. -->
             </p>
             
             <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <p>
-                    This is only visible to users who also have the ADMIN role.
+                    <!-- This is only visible to users who also have the ADMIN role. -->
                 </p>
 
+
+                <!-- <div class="background">
+                    <div class="transbox">
+                      <p>This is some text that is placed in the transparent box.</p>
+                    </div>
+                  </div> -->
                 <!-- <nav class="nav">
                         <div class="nav__container">
                                 <div class="col-md-3" id="menu">
@@ -369,12 +325,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="js/content.js"></script> 
    
-        <script>  
-function myFunction() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
-</script>
- 
+     
     </body>
 </html>
