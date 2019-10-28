@@ -63,13 +63,9 @@ public class TripDbDao implements TripDao {
         jdbc.update(psc, holder);
 
         int generatedId = holder.getKey().intValue();
+        addTeachersToTrip(tripToAdd.getTeachers(), generatedId);
 
         tripToAdd.setId(generatedId);
-
-        List<SiteUser> teachers = new ArrayList();
-
-        // Add Teacher who created the trip to the teacher list
-        tripToAdd.setTeachers(teachers);
 
         return tripToAdd.getId();
 
@@ -92,6 +88,7 @@ public class TripDbDao implements TripDao {
         String update = "UPDATE Trip SET `name` = ?, startdate = ?, enddate = ? WHERE id = ?";
 
         jdbc.update(update, trip.getName(), trip.getStartDate(), trip.getEndDate(), trip.getId());
+        
 
     }
 
@@ -246,7 +243,7 @@ public class TripDbDao implements TripDao {
 
     @Override
     public List<Trip> getTripsByUser(int userId) throws DaoException {
-        String select = "SELECT FROM usertrip where userid = ?";
+        String select = "SELECT * FROM trip t inner join usertrip ut on t.id = ut.tripid where userid = ?";
         try{
         return jdbc.query(select, new TripMapper(), userId);
         }catch(DataAccessException ex) {
@@ -255,6 +252,40 @@ public class TripDbDao implements TripDao {
         
 
     }
+
+    private void addTeachersToTrip(List<SiteUser> teachers, int tripId) throws DaoException{
+        String delete = "Delete from UserTrip where userid = ? and tripid= ?";
+        for (SiteUser user : teachers){
+            int rowsAffected = jdbc.update(delete, user.getId(), tripId);
+
+        if (rowsAffected > 1) {
+            throw new DaoException("Delete process failed.");
+        }
+        }
+        String insert = "insert into UserTrip(tripid, userid) values (?, ?)";
+        
+        for (SiteUser user : teachers){
+            jdbc.update(insert, tripId, user.getId());
+        }
+        
+    }
+    
+//    private void addStudentsToTrip(List<SiteUser> students, int tripId) throws DaoException{
+//        String delete = "Delete * from UserTrip where userid = ? and tripid= ?";
+//        for (SiteUser user : students){
+//            int rowsAffected = jdbc.update(delete, user.getId(), tripId);
+//
+//        if (rowsAffected != 1) {
+//            throw new DaoException("Delete process failed.");
+//        }
+//        }
+//        String insert = "insert into UserTrip(?, ?)";
+//        
+//        for (SiteUser user : students){
+//            jdbc.update(insert, tripId, user.getId());
+//        }
+//        
+//    }
 
     private static class TripMapper implements RowMapper<Trip> {
 
