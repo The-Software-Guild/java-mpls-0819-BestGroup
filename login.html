@@ -3,6 +3,26 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
+        <style>
+           #body {
+            background-image: url("https://cdn.pixabay.com/photo/2016/07/28/16/01/office-1548294_1280.jpg");
+            font-family: Verdana;
+            overflow: auto;
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            max-width: 800px;
+        }
+        #hed{
+            text-align: right;
+            font-style: italic;
+           
+             background-size: cover;
+            background-repeat: repeat;
+        }
+       
+        
+        </style>
         <!-- Required meta tags -->
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -12,51 +32,59 @@
 
             <title>Hello Security: Home</title>
     </head>
-    <body>
-        <div class="container">
-            <h1>Hello Security</h1>
+    <body id="body">
+            <div id="hed"><div class="center"><h1>Study Abroad...</h1></div></div>
+               
             <hr/>
+        </div>
+         
+        <div class="container">
+           
             <h2>Login Page</h2>
 
             <h3 th:if="${#request.getParameter('login_error') == '1'}">
                 Wrong id or password!</h3>
 
-            <form class="form-horizontal" 
-                  role="form" 
-                  method="post" 
-                  action="login">
-                <div class="form-group">
-                    <label for="username" class="col-md-4 control-label">Username:</label>
-                    <div class="col-md-8">
-                        <input type="text" 
-                               class="form-control" 
-                               id="username"
-                               name="username" 
-                               placeholder="Username"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="col-md-4 control-label">Password:</label>
-                    <div class="col-md-8">
-                        <input type="password" 
-                               class="form-control" 
-                               id="password"
-                               name="password" 
-                               placeholder="Password"/>
-                    </div>
-                </div>
-                <input type="hidden"                        
-                       th:name="${_csrf.parameterName}"
-                       th:value="${_csrf.token}"/>
-                <div class="form-group">
-                    <div class="col-md-offset-4 col-md-8">
-                        <input type="submit" 
-                               class="btn btn-default" 
-                               id="search-button" 
-                               value="Sign In"/>
-                    </div>
-                </div>
-            </form>    
+                <form class="form-horizontal" 
+                role="form" 
+                method="post" 
+                action="login">
+              <div class="form-group">
+                  <label for="username" class="col-md-4 control-label">Username:</label>
+                  <div class="col-md-4">
+                      <input type="text" 
+                             class="form-control" 
+                             id="username"
+                             name="username" 
+                             placeholder="Username"/>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="password" class="col-md-4 control-label">Password:</label>
+                  <div class="col-md-4">
+                      <input type="password" 
+                             class="form-control" 
+                             id="password"
+                             name="password" 
+                             placeholder="Password"/>
+                  </div>
+              </div>
+              <input type="hidden"                        
+                     th:name="${_csrf.parameterName}"
+                     th:value="${_csrf.token}"/>
+              <div class="form-group">
+                  <div class="col-md-offset-4 col-md-8">
+                      <input type="submit" 
+                             class="btn btn-default" 
+                             id="search-button" 
+                             value="Sign In"/>
+                             <input type="submit" 
+                             class="btn btn-default" 
+                             id="search-button" 
+                             value="Sign up"/>
+                  </div>
+              </div>
+          </form>    
         </div>
 
         <!-- Optional JavaScript -->

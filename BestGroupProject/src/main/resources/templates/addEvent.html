@@ -10,6 +10,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
                 <!-- Bootstrap CSS -->
+<<<<<<< HEAD
                 <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
                     <link rel="stylesheet" type="text/css" media="screen"
                           href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
@@ -20,6 +21,35 @@
                                 <div class="row m-4">
                                     <div class="col text-center border border-dark">
                                         <h1>Add Event</h1>
+=======
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+
+                <title> Add Event </title>
+
+
+                <link rel="stylesheet" type="text/css" media="screen"
+                      href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+                    </head>
+                    <body>
+                        <div class="container">
+                            <div class="row m-4">
+                                <div class="col text-center border border-dark">
+                                    <h1>Add Event</h1>
+                                </div>
+                            </div>
+                            <div class="col-7 text-center m-3">
+                                <form action="addEvent" method="POST">
+                                    <input type="hidden"                        
+                                           th:name="${_csrf.parameterName}"
+                                           th:value="${_csrf.token}"/>
+                                    <div class="form-group row">
+                                        <label for="name" class="col-3 col-form-label">
+                                            Name</label>
+                                        <div class="col-9">
+                                            <input type="text" name="name" 
+                                                   id="name" class="form-control"/>
+                                        </div>
+>>>>>>> acc1741d44d5c3e7b1ea018300019ab98e017f8a
                                     </div>
                                 </div>
                                 <div class="col-7 text-center m-3">
@@ -101,6 +131,7 @@
                                         <button type="submit" class="btn btn-primary">Add Event</button>
                                     </form>
                                 </div>
+
                             </div>
 
 
@@ -122,6 +153,7 @@
                                 });
                             </script>
 
+<<<<<<< HEAD
 
                             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -129,3 +161,28 @@
                         </body>
 
                         </html>
+=======
+                        <script type="text/javascript"
+                                src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+                        </script> 
+                        <script type="text/javascript"
+                                src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+                        </script>
+                        <script type="text/javascript"
+                                src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+                        </script>
+                        <script type="text/javascript"
+                                src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+                        </script>
+                        <script type="text/javascript">
+                            $('#datetimepicker').datetimepicker({
+                            format: 'dd/MM/yyyy hh:mm:ss',
+                            language: 'pt-BR'
+                            });
+                        </script>
+                        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>    
+                    </body>
+                    </html>
+>>>>>>> acc1741d44d5c3e7b1ea018300019ab98e017f8a
