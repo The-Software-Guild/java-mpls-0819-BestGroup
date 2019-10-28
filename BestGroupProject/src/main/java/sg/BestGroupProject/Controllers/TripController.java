@@ -68,13 +68,13 @@ public class TripController {
         return "tripHome";
     }
     
-    @GetMapping("/showEvent/{eventId}")
+    @GetMapping("/event/{eventId}")
     public String displayEvent(@PathVariable Integer eventId, Model model){
 
         Response<Event> response = tripService.getEventById(eventId);
 
         model.addAttribute("event", response.getData());
-        return "showEvent";
+        return "event";
     }
 
 //     @PostMapping("signUp")
