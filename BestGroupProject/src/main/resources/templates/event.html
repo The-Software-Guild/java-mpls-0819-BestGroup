@@ -27,38 +27,39 @@
                     <title>Event</title>
                     </head>
                     <body>
-                        <!--                        <div class="container">
-                                                    
-                                                                        </div>-->
-                        <div class="container-fluid">
-                            <div class="row">
+<!--                        <div class="container">
+                            
+                                                </div>-->
+                                                <div class="container-fluid">
+                                                    <div class="row">
                                 <p>Logo</p><br>
                                     <p>Title</p><br>
                                         <p>Tabs</p><br>
                                             <p>Other shit</p><br>
                                                 </div>
-                                                <div class="col-md-4" style="display: table-cell; width: 14%; 
-                                                     background-color: lightgrey; border-radius: 10px; border-style: solid">
-                                                    <div class="day" style="background-color: #b2d0f9; 
-                                                         text-align: center; width: 100%; border-radius: 10px; 
-                                                         margin: 5px; border-style: solid" th:text="${#temporals.dayOfWeekName(event.startTime)}"></div>
-                                                    <div class="dayEvents" th:href="${'/showEvent?eventId=' + event.id}" style="text-align: center; 
-                                                         width: 100%; background-color: #b2d0f9;
-                                                         border-radius: 10px">
-                                                        <div><a th:text="${event.name}"></a><hr/>
-                                                            <a th:text="${event.startTime}"></a><hr/>
-                                                            <a th:text="${event.location}"></a><hr/>
-                                                            <a th:text="${event.description}"></a><hr/>
-                                                            <a th:text="${event.endTime}"></a>
-                                                            <input type="hidden" id="address" th:value="${event.location}">
+                                                    <div class="row">
+                                                        <div class="col-md-8" > 
+                                                            <div id="map"></div>
                                                         </div>
+                                                        <div class="col-md-4" style="display: table-cell; width: 14%; 
+                                                             background-color: lightgrey; border-radius: 10px; border-style: solid">
+                                                            <div class="day" style="background-color: #b2d0f9; 
+                                                                 text-align: center; width: 100%; border-radius: 10px; 
+                                                                 margin: 5px; border-style: solid" th:text="${#temporals.dayOfWeekName(event.startTime)}"></div>
+                                                            <div class="dayEvents" th:href="${'/showEvent?eventId=' + event.id}" style="text-align: center; 
+                                                                 width: 100%; background-color: #b2d0f9;
+                                                                 border-radius: 10px">
+                                                                <div><a th:text="${event.name}"></a><hr/>
+                                                                    <a th:text="${event.startTime}"></a><hr/>
+                                                                    <a th:text="${event.location}"></a><hr/>
+                                                                    <a th:text="${event.description}"></a><hr/>
+                                                                    <a th:text="${event.endTime}"></a>
+                                                                    <input type="hidden" id="address" th:value="${event.location}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-8" > 
-                                                        <div id="map"></div>
-                                                    </div>
-                                                </div>
                                                 </div>
                                                 <!--                                                <div class="container">
                                                                                                                                                         <div class="row">
