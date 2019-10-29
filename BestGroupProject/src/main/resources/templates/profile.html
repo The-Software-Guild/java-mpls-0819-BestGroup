@@ -67,9 +67,11 @@
                 <table>
                     <tr>
                         <th>Trip name</th>
+                        <th>Edit Trip</th>
                     </tr>
                     <tr th:each="trip : ${trips}">
                         <td><a class="btn" style="background-color: lightgrey; border-radius: 10px" th:href="@{/tripHome/{id}(id=${trip.id})}" th:text="${trip.name}"></a></td>
+                        <td><a href="#" th:href="@{/editTrip(id=${trip.id})}">Edit</a></td>
                     </tr>
                 </table>
             </div>
