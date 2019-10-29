@@ -5,7 +5,9 @@
  */
 package sg.BestGroupProject.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
+import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -13,9 +15,9 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author cas
  */
 public class Event {
-    @DateTimeFormat
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime startTime;
-    @DateTimeFormat
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime endTime;
     private Category category;
     private String location;

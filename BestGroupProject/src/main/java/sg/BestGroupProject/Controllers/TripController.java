@@ -102,7 +102,7 @@ public class TripController {
 //        String startTime = request.getParameter("startTime");
 //        String endTime = request.getParameter("endTime");
 ////        String description = request.getParameter("description");
-////        String categoryId = request.getParameter("categoryId");
+        String categoryId = request.getParameter("categoryId");
 ////        String transportationId = request.getParameter("TransportationId");
 ////
 ////        Event event = new Event();
@@ -111,13 +111,15 @@ public class TripController {
 ////        event.setDescription(description);
 //        toAdd.setStartTime(LocalDateTime.parse(startTime));
 //        toAdd.setEndTime(LocalDateTime.parse(endTime));
-//        event.setCategory(Category.valueOf(categoryId));
+        toAdd.setCategory(Category.valueOf(categoryId));
 //        event.setTransportationId(transportationId);
         
+        String tripId = request.getParameter("tripId");
+        toAdd.setTripId(Integer.parseInt(tripId));
         tripService.addEvent(toAdd);
         
 
-        return "redirect:/tripHome";
+        return "redirect:/tripHome/" + toAdd.getTripId();
     }
     
     @GetMapping("/addTrip")

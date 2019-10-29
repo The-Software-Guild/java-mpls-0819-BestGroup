@@ -6,6 +6,7 @@
 package sg.BestGroupProject.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,9 +21,9 @@ public class Trip {
     private LocalDate startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
-    private List<SiteUser> teachers;
-    private List<SiteUser> students;
-    private List<Event> events;
+    private List<SiteUser> teachers = new ArrayList<>();
+    private List<SiteUser> students = new ArrayList<>();
+    private List<Event> events = new ArrayList<>();
 
     /**
      * @return the id
