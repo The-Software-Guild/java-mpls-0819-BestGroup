@@ -13,7 +13,26 @@
 
 
 
-
+#main {
+  background-image: url("https://cdn.pixabay.com/photo/2016/07/28/16/01/office-1548294_1280.jpg") ;
+  font-family: Cambria;
+  overflow: auto;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-width: 100%;
+      opacity: 0.74;
+  
+}
+#bg{
+  float: left;
+  font-weight: bold;
+      color: #069;
+      font-size:xx-large;
+      font-style: italic;
+      margin-right: 35%;
+      margin-left: 1%;
+}
 
 html {
   font-family: sans-serif;

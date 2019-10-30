@@ -1,0 +1,61 @@
+#main {
+    background-image: url("office-1548294_1280 (1).jpg") ;
+    font-family: Cambria;
+    overflow: auto;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+        opacity: 0.85;
+    
+}
+#bg{
+    
+    float: left;
+    font-weight: bold;
+        color: #069;
+        font-size:xx-large;
+        font-style: italic;
+        margin-right:70%;
+        margin-left: 1%;
+}
+#nav {
+            
+    width: 100%;
+    float: left;
+    margin: 0 0 0 0;
+    padding: 0;
+    background-color: black;
+   
+}
+
+#nav ul {
+    list-style: none;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#nav li {
+    float: left;
+    color: #069;
+    height: 100%;
+}
+
+#nav li a {
+    display: block;
+    padding: 8px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #069;
+    border-right: 1px solid #ccc;
+}
+
+#nav li:first-child a {
+    border-left: 1px solid #ccc;
+}
+
+#nav li a:hover {
+    color: #069;
+    background-color:tan;
+}
