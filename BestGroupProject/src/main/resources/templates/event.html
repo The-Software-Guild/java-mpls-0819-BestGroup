@@ -58,11 +58,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                                        <p>
-                                                            <button onclick="location.href='editEvent'" type="submit">Edit Event</button>
-                                                        </p>
-                                                    </div>
+                                                </div>
+                                                <div style="float:right"  sec:authorize="hasRole('ROLE_ADMIN')">
+                                                    <p>
+                                                        <a th:href="@{editEvent/{id}(id=${event.id})}" class="btn-default">Edit Event</a>
+                                                    </p>
                                                 </div>
                                                 </div>
                                                 <!--                                                <div class="container">

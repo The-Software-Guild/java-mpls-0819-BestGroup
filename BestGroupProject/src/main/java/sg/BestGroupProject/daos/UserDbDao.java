@@ -72,14 +72,20 @@ public class UserDbDao implements UserDao {
     }
 
     @Override
-    public void updateUser(SiteUser user) {
+    public void updateUser(SiteUser user, int tripId) {
 
-        String updateStatement = "Update user SET username = ?, password = ?, enabled = ?, firstname = ?,"
-                + " lastname = ?, schoolname = ?, emergencycontactname = ?, emergencycontactphone = ?, WHERE id = ?";
+//        String updateStatement = "Update user SET username = ?, password = ?, enabled = ?, firstname = ?,"
+//                + " lastname = ?, schoolname = ?, emergencycontactname = ?, emergencycontactphone = ?, WHERE id = ?";
+
+//            int updateRowsAffected = jdbc.update(updateStatement, user.getUsername(),
+//                user.getPassword(), user.isEnabled(), user.getFirstName(), user.getLastName(), 
+//                user.getSchoolName(), user.getEmergencyContactName(), user.getEmergencyContactPhone(), user.getId());
+
+        String updateStatement = "Update user SET username = ?, password = ?, enabled = ? WHERE id = ?";
+
 
         int updateRowsAffected = jdbc.update(updateStatement, user.getUsername(),
-                user.getPassword(), user.isEnabled(), user.getFirstName(), user.getLastName(), 
-                user.getSchoolName(), user.getEmergencyContactName(), user.getEmergencyContactPhone(), user.getId());
+                user.getPassword(), user.isEnabled(), user.getId());
 
         //TODO: CHECK THAT ROWS AFFECTED =1
         String deleteStatement = "DELETE FROM user_role WHERE user_id = ?";
@@ -94,6 +100,12 @@ public class UserDbDao implements UserDao {
 
             //TODO: CHECK THAT ROWS AFFECTED = 1
         }
+//        String deleteTrip = "delete from UserTrip where exists (select UserId where UserId = 2)";
+//        
+//        int deleteRows = jdbc.update(deleteTrip, user.getId());
+        
+        String insertUserTrip = "insert into UserTrip(TripId, UserId) values (?, ?)";
+        int updateUserTrip = jdbc.update(insertUserTrip, tripId, user.getId());
     }
 
     @Override
@@ -208,6 +220,37 @@ public class UserDbDao implements UserDao {
         role.setId(newId);
 
         return role;    
+    }
+
+    @Override
+    public void updateUserPassword(SiteUser user) {
+        
+//        String updateStatement = "Update user SET username = ?, password = ?, enabled = ?, firstname = ?,"
+//                + " lastname = ?, schoolname = ?, emergencycontactname = ?, emergencycontactphone = ?, WHERE id = ?";
+
+//            int updateRowsAffected = jdbc.update(updateStatement, user.getUsername(),
+//                user.getPassword(), user.isEnabled(), user.getFirstName(), user.getLastName(), 
+//                user.getSchoolName(), user.getEmergencyContactName(), user.getEmergencyContactPhone(), user.getId());
+
+        String updateStatement = "Update user SET username = ?, password = ?, enabled = ? WHERE id = ?";
+
+
+        int updateRowsAffected = jdbc.update(updateStatement, user.getUsername(),
+                user.getPassword(), user.isEnabled(), user.getId());
+
+        //TODO: CHECK THAT ROWS AFFECTED =1
+        String deleteStatement = "DELETE FROM user_role WHERE user_id = ?";
+
+        int deleteRowsAffected = jdbc.update(deleteStatement, user.getId());
+
+        String insert = "INSERT INTO user_role (user_id, role_id) VALUES (?, ?)";
+
+        for (Role toAdd : user.getRoles()) {
+
+            int insertRowsAffected = jdbc.update(insert, user.getId(), toAdd.getId());
+
+            //TODO: CHECK THAT ROWS AFFECTED = 1
+        }
     }
 
     

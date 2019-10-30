@@ -128,17 +128,13 @@ public class TripController {
         return "addTrip";
     }
     
-        @GetMapping("/editEvent/{eventId}")
-    public String editEvent( @PathVariable int eventId, Model pageModel ){
+        @GetMapping("/event/editEvent/{eventId}")
+    public String editEvent( @PathVariable Integer eventId, Model pageModel ){
         
         //TODO make sure id is not null
          Event toEdit = tripService.getEventById(eventId).getData();
          
          pageModel.addAttribute( "toEdit" , toEdit);
-        
-
-        
-        
         
         return "editEvent";
     }
