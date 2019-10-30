@@ -1,12 +1,13 @@
 #main {
-    background-image: url("office-1548294_1280 (1).jpg") ;
+    background-image: url("/office-1548294_1280 (1).jpg") ;
     font-family: Cambria;
     overflow: auto;
     height: 100vh;
+    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     
-        opacity: 0.85;
+        opacity: 0.80;
     
 }
 #bg{
