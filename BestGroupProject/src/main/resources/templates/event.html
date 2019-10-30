@@ -54,29 +54,33 @@
                                         <p>Tabs</p><br>
                                             <p>Other shit</p><br>
                                                 </div>
-                                                    <div class="row">
-                                                        <div class="col-md-8" > 
-                                                            <div id="map"></div>
-                                                        </div>
-                                                        <div class="col-md-4" style="display: table-cell; width: 14%; 
-                                                             background-color: lightgrey; border-radius: 10px; border-style: solid">
-                                                            <div class="day" style="background-color: #b2d0f9; 
-                                                                 text-align: center; width: 100%; border-radius: 10px; 
-                                                                 margin: 5px; border-style: solid" th:text="${#temporals.dayOfWeekName(event.startTime)}"></div>
-                                                            <div class="dayEvents" th:href="${'/showEvent?eventId=' + event.id}" style="text-align: center; 
-                                                                 width: 100%; background-color: #b2d0f9;
-                                                                 border-radius: 10px">
-                                                                <div><a th:text="${event.name}"></a><hr/>
-                                                                    <a th:text="${event.startTime}"></a><hr/>
-                                                                    <a th:text="${event.location}"></a><hr/>
-                                                                    <a th:text="${event.description}"></a><hr/>
-                                                                    <a th:text="${event.endTime}"></a>
-                                                                    <input type="hidden" id="address" th:value="${event.location}">
-                                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-8" > 
+                                                        <div id="map"></div>
+                                                    </div>
+                                                    <div class="col-md-4" style="display: table-cell; width: 14%; 
+                                                         background-color: lightgrey; border-radius: 10px; border-style: solid">
+                                                        <div class="day" style="background-color: #b2d0f9; 
+                                                             text-align: center; width: 100%; border-radius: 10px; 
+                                                             margin: 5px; border-style: solid" th:text="${#temporals.dayOfWeekName(event.startTime)}"></div>
+                                                        <div class="dayEvents" th:href="${'/showEvent?eventId=' + event.id}" style="text-align: center; 
+                                                             width: 100%; background-color: #b2d0f9;
+                                                             border-radius: 10px">
+                                                            <div><a th:text="${event.name}"></a><hr/>
+                                                                <a th:text="${event.startTime}"></a><hr/>
+                                                                <a th:text="${event.location}"></a><hr/>
+                                                                <a th:text="${event.description}"></a><hr/>
+                                                                <a th:text="${event.endTime}"></a>
+                                                                <input type="hidden" id="address" th:value="${event.location}">
                                                             </div>
                                                         </div>
-
                                                     </div>
+                                                </div>
+                                                <div style="float:right"  sec:authorize="hasRole('ROLE_ADMIN')">
+                                                    <p>
+                                                        <a th:href="@{editEvent/{id}(id=${event.id})}" class="btn-default">Edit Event</a>
+                                                    </p>
+                                                </div>
                                                 </div>
                                                 <!--                                                <div class="container">
                                                                                                                                                         <div class="row">
@@ -94,30 +98,30 @@
                                                 async defer></script> 
                                                 <script>
                                                     function initMap() {
-                                                        var map = new google.maps.Map(document.getElementById('map'), {
-                                                            zoom: 8,
-                                                            center: {lat: -34.397, lng: 150.644}
-                                                        });
-                                                        var geocoder = new google.maps.Geocoder();
+                                                    var map = new google.maps.Map(document.getElementById('map'), {
+                                                    zoom: 8,
+                                                    center: {lat: -34.397, lng: 150.644}
+                                                    });
+                                                    var geocoder = new google.maps.Geocoder();
 
-                                                        window.addEventListener('load', function () {
-                                                            geocodeAddress(geocoder, map);
-                                                        });
+                                                    window.addEventListener('load', function () {
+                                                    geocodeAddress(geocoder, map);
+                                                    });
                                                     }
 
                                                     function geocodeAddress(geocoder, resultsMap) {
-                                                        var address = document.getElementById('address').value;
-                                                        geocoder.geocode({'address': address}, function (results, status) {
-                                                            if (status === 'OK') {
-                                                                resultsMap.setCenter(results[0].geometry.location);
-                                                                var marker = new google.maps.Marker({
-                                                                    map: resultsMap,
-                                                                    position: results[0].geometry.location
-                                                                });
-                                                            } else {
-                                                                alert('Geocode was not successful for the following reason: ' + status);
-                                                            }
-                                                        });
+                                                    var address = document.getElementById('address').value;
+                                                    geocoder.geocode({'address': address}, function (results, status) {
+                                                    if (status === 'OK') {
+                                                    resultsMap.setCenter(results[0].geometry.location);
+                                                    var marker = new google.maps.Marker({
+                                                    map: resultsMap,
+                                                    position: results[0].geometry.location
+                                                    });
+                                                    } else {
+                                                    alert('Geocode was not successful for the following reason: ' + status);
+                                                    }
+                                                    });
                                                     }
                                                 </script>
 

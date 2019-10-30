@@ -5,8 +5,6 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       >
     <head>
-        <link href="/StyleSheet.css" rel="stylesheet" type="text/css">
-
         <!-- Required meta tags -->
         <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,31 +13,17 @@
                 <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
                     <link rel="stylesheet" type="text/css" media="screen"
                           href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
-                        <title> Add Event </title>
+                        <title> Edit Event </title>
                         </head>
                         <body>
-                                <div id="nav">
-                                        <ul>
-                                            <li class="mainlogo"><img
-                                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6B9WREhZu1q-kjqGdIWK6mVaGH83NMe6OmpdaN9BcDHBqq-2&s"
-                                                    height="55" width="80"></li>
-                                            <li id="bg">Best Group</li>
-                                            <li><a href="home.html">Home</a></li>
-                                
-                                
-                                
-                                
-                                        </ul>
-                                    </div>
-                                <div class="container-fluid" id="main">
                             <div class="container">
                                 <div class="row m-4">
                                     <div class="col text-center border border-dark">
-                                        <h1>Add Event</h1>
+                                        <h1>Edit Event</h1>
                                     </div>
                                 </div>
                                 <div class="col-7 text-center m-3">
-                                    <form action="addEvent" method="POST">
+                                    <form action="editEvent" method="POST">
                                         <input type="hidden"                        
                                                th:name="${_csrf.parameterName}"
                                                th:value="${_csrf.token}"/>
@@ -51,7 +35,7 @@
                                                 Name</label>
                                             <div class="col-9">
                                                 <input type="text" name="name" 
-                                                       id="name" class="form-control"/>
+                                                       id="name" class="form-control" th:value="${toEdit.name}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -59,7 +43,7 @@
                                                 Location</label>
                                             <div class="col-9">
                                                 <input type="text" name="location" 
-                                                       id="location" class="form-control"/>
+                                                       id="location" class="form-control" th:value="${toEdit.location}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -67,7 +51,7 @@
                                                 Description</label>
                                             <div class="col-9">
                                                 <input type="text" name="description" 
-                                                       id="description" class="form-control"/>
+                                                       id="description" class="form-control" th:value="${toEdit.description}"/>
                                             </div>
                                         </div>
 
@@ -76,7 +60,7 @@
                                                 Start Time</label>
                                             <div class="col-6">
                                                 <div id="datetimepicker" class="input-append date">
-                                                    <input type="text" name="startTime" id="startTime" class="form-control"></input>
+                                                    <input type="text" name="startTime" id="startTime" class="form-control" th:value="${toEdit.startTime}"></input>
                                                     <span class="add-on">
                                                         <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                                                     </span>
@@ -87,9 +71,9 @@
                                             <label for="endTime" class="col-3 col-form-label">
                                                 End Time</label>
                                             <div class="col-6">
-                                                <div id="datetimepicker1" class="input-append date">
-                                                    <input type="text" name="endTime" id="endTime" class="form-control"></input>
-                                                    <span class="add-on">
+                                                <div id="datetimepicker" class="input-append date">
+                                                <input type="text" name="endTime" id="endTime" class="form-control" th:value="${toEdit.endTime}"/>
+                                                <span class="add-on">
                                                         <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                                                     </span>
                                                 </div>
@@ -103,6 +87,7 @@
                                                     <option th:each="category : ${categories}"
                                                             th:value="${category}"
                                                             th:text="${category}"
+                                                            th:selected="${toEdit.category==category}"
                                                             >
                                                     </option>
                                                 </select>
@@ -113,45 +98,16 @@
                                                 Transportation Id</label>
                                             <div class="col-9">
                                                 <input type="text" name="transportationId" 
-                                                       id="transportationId" class="form-control"/>
+                                                       id="transportationId" class="form-control" th:value="${toEdit.transportationId}"/>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Add Event</button>
+                                        <input type="hidden" name="id" th:value="${toEdit.id}"/>
+                                        <button type="submit" class="btn btn-primary">Edit Event</button>
                                     </form>
                                 </div>
 
                             </div>
-<<<<<<< HEAD
 
-                            <script type="text/javascript"
-                                    src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-                            </script> 
-                            <script type="text/javascript"
-                                    src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
-                            </script>
-                            <script type="text/javascript"
-                                    src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-                            </script>
-                            <script type="text/javascript"
-                                    src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
-                            </script>
-                            <script type="text/javascript">
-                                $('#datetimepicker').datetimepicker({
-                                format: 'dd/MM/yyyy hh:mm:ss',
-                                });
-                            </script>
-                            <script type="text/javascript">
-                                $('#datetimepicker1').datetimepicker({
-                                format: 'dd/MM/yyyy hh:mm:ss',
-                                });
-                            </script>
-                            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>    
-                        </body>
-                        </html>
-=======
-                                </div>
                         <script type="text/javascript"
                                 src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
                         </script> 
@@ -175,5 +131,3 @@
                         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>    
                     </body>
                     </html>
->>>>>>> 279e2b54fda5c929b35369c61489ebef5953df62
-

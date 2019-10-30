@@ -128,6 +128,17 @@ public class TripController {
         return "addTrip";
     }
     
+        @GetMapping("/event/editEvent/{eventId}")
+    public String editEvent( @PathVariable Integer eventId, Model pageModel ){
+        
+        //TODO make sure id is not null
+         Event toEdit = tripService.getEventById(eventId).getData();
+         
+         pageModel.addAttribute( "toEdit" , toEdit);
+        
+        return "editEvent";
+    }
+    
      @PostMapping("/addTrip")   
     public String addTrip(Trip toAdd) {
         String userName = ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
