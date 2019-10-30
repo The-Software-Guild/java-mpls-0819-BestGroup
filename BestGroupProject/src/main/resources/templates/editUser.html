@@ -32,7 +32,7 @@
         <div class="container">
             <h1>Hello Security</h1>
             <hr/>
-            <div class="navbar">
+<!--            <div class="navbar">
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="nav-item">
                         <a class="nav-link" href="home">
@@ -50,7 +50,7 @@
                         </a>
                     </li>
                 </ul>    
-            </div>
+            </div>-->
             <h2>Edit User Page</h2>
             <div sec:authorize="isAuthenticated()">
                 <form class="form-inline" 
@@ -118,6 +118,10 @@
                                 </div>
                             </select>
                         </div>
+                    </div>
+                    <div class="form-group row">
+                    <label for="tripId">Trip Number</label>&nbsp;
+                    <input type="text" name="tripId" id="tripId">&nbsp;
                     </div>
                     <div class="form-group row">
                         <div class="col-md-offset-4 col-md-8">

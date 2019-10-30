@@ -43,7 +43,11 @@
                                 <p>Title</p>
                                 <p>Tabs</p>
                                 <p>Other shit</p>
-                                <a th:href="@{addEvent/{id}(id=${daysList.get(0).tripId})}"> addEvent </a>    
+                                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <p>
+                                        <a th:href="@{addEvent/{id}(id=${daysList.get(0).tripId})}"> addEvent </a>    
+                                    </p>
+                                </div>
 
                             </div>
                             <div class="row-md-8" id="week" th:each="dayEvents : ${daysList}">
@@ -52,7 +56,7 @@
                                     <div class="day" style="background-color: #b2d0f9; 
                                          text-align: center; width: 100%; border-radius: 10px; 
                                          margin: 5px; border-style: solid" th:text="${#temporals.dayOfWeekName(dayEvents.day)}"></div>
-                                    <button class="btn" th:data-url="@{/event/{eventId}(eventId=${event.id})}" onclick="location.href=this.getAttribute('data-url')" th:value="${event.id}" style="text-align: center; 
+                                    <button class="btn" th:data-url="@{/event/{eventId}(eventId=${event.id})}" onclick="location.href = this.getAttribute('data-url')" th:value="${event.id}" style="text-align: center; 
                                             width: 100%; background-color: #b2d0f9;
                                             border-radius: 10px" th:each="event : ${dayEvents.events}">
                                         <div><a th:text="${event.name}"></a>

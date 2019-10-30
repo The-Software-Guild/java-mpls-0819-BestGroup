@@ -105,7 +105,7 @@ public class TripService {
 
         if (event == null || event.getStartTime() == null || event.getEndTime() == null
                 || event.getName().isEmpty() || event.getName() == null
-                || event.getCategory() == null || event.getTripId() <= 0) {
+                || event.getCategory() == null) {
             response.setMessage("Invalid event. Please try again");
         } else {
             event = tDao.addEvent(event);

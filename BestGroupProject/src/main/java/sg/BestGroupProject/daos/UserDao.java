@@ -18,7 +18,7 @@ public interface UserDao {
     SiteUser getUserByUsername(String username);
 //    may be able to delete
     List<SiteUser> getAllUsers();
-    void updateUser(SiteUser user);
+    void updateUser(SiteUser user, int tripId);
     void deleteUser(int id);
     SiteUser createUser(SiteUser user, int tripId);
     
@@ -28,4 +28,6 @@ public interface UserDao {
     void deleteRole(int id);
     void updateRole(Role role);
     Role createRole(Role role);
+
+    public void updateUserPassword(SiteUser user);
 }
