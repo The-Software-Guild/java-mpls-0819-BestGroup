@@ -11,52 +11,62 @@
 
                 <!-- Bootstrap CSS -->
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="/StyleSheet.css" rel="stylesheet" type="text/css">
+                    <link href="/StyleSheet.css" rel="stylesheet" type="text/css">
 
-                    <title>Trip</title>
-                    </head>
-                    <body>
+                        <title>Trip</title>
+                        </head>
+                        <body>
+                            <div id="nav">
+                                <ul>
+                                    <li class="mainlogo"><img
+                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6B9WREhZu1q-kjqGdIWK6mVaGH83NMe6OmpdaN9BcDHBqq-2&s"
+                                            height="55" width="80"></li>
+                                    <li id="bg">Best Group</li>
+                                    <li><a href="/home">Home</a></li>
+
+
+
+
+                                </ul>
+                            </div>
                             <div class="container-fluid" id="main">
-                                <div class="container">
-                                    <div class="row-md-4">
-                                        <div class="navbar">
-                                            <ul class="nav nav-tabs">
-                                                <li role="presentation" class="nav-item">
-                                                    <a class="nav-link" href="/tripHome.html" th:href="@{/tripHome/{id}(id=${daysList.get(0).tripId})}">
-                                                        Trip Calendar
-                                                    </a>
-                                                </li>
-                                                <li role="presentation" class="nav-item">
-                                                    <a class="nav-link" href="/message.html" th:href="@{/message/{id}(id=${daysList.get(0).tripId})}">
-                                                        Message Board
-                                                    </a>
-                                                </li>
-                                            </ul>    
-                                        </div>
-                                        <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                            <p>
-                                                <a th:href="@{addEvent/{id}(id=${daysList.get(0).tripId})}"> addEvent </a>    
-                                            </p>
-                                        </div>
+                                <!--                                <div class="container">-->
+                                <div class="row-md-4">
+                                    <div class="navbar">
+                                        <ul class="nav nav-tabs">
+                                            <li role="presentation" class="nav-item">
+                                                <a class="nav-link" href="/tripHome.html" th:href="@{/tripHome/{id}(id=${daysList.get(0).tripId})}">
+                                                    Trip Calendar
+                                                </a>
+                                            </li>
+                                            <li role="presentation" class="nav-item">
+                                                <a class="nav-link" href="/message.html" th:href="@{/message/{id}(id=${daysList.get(0).tripId})}">
+                                                    Message Board
+                                                </a>
+                                            </li>
+                                        </ul>    
                                     </div>
-                                    <div class="row-md-8" id="week" th:each="dayEvents : ${daysList}">
-                                        <div class="col" style="display: table-cell; width: 14%; 
-                                             background-color: lightgrey; border-radius: 10px; border-style: solid">
-                                            <div class="day" style="background-color: #b2d0f9; 
-                                                 text-align: center; width: 100%; border-radius: 10px; 
-                                                 margin: 5px; border-style: solid" th:text="${#temporals.dayOfWeekName(dayEvents.day)}"></div>
-                                            <button class="btn" th:data-url="@{/event/{eventId}(eventId=${event.id})}" onclick="location.href = this.getAttribute('data-url')" th:value="${event.id}" style="text-align: center; 
-                                                    width: 100%; background-color: #b2d0f9;
-                                                    border-radius: 10px" th:each="event : ${dayEvents.events}">
-                                                <div><a th:text="${event.name}"></a>
-                                                    <a th:text="${event.startTime}"></a>
-                                                    <a th:text="${event.location}"></a></div>
-                                            </button>
-                                        </div>
+                                    <div sec:authorize="hasRole('ROLE_ADMIN')" style="margin: 10px">
+                                        <span style="background-color: lightgrey; padding: 10px; border-radius: 10px">                                                
+                                            <a th:href="@{addEvent/{id}(id=${daysList.get(0).tripId})}"> addEvent </a>    
+                                        </span>
                                     </div>
                                 </div>
-
+                                <div class="row" id="week" >
+                                    <div class="col" th:each="dayEvents : ${daysList}" >
+                                        <div class="day" style="" th:text="${#temporals.dayOfWeekName(dayEvents.day)}"></div>
+                                        <button class="eventButton" th:data-url="@{/event/{eventId}(eventId=${event.id})}" onclick="location.href = this.getAttribute('data-url')" th:value="${event.id}" style="text-align: center; 
+                                                width: 100%; background-color: #b2d0f9;
+                                                border-radius: 10px" th:each="event : ${dayEvents.events}">
+                                            <div><span th:text="${event.name}"></span><br>
+                                                <span th:text="${event.startTime}"></span><br>
+                                                <span class="loc" th:text="${event.location}"></span></div>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
+
+                            <!--                            </div>-->
                             <!-- Optional JavaScript -->
                             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
                             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
