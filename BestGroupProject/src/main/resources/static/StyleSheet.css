@@ -59,3 +59,9 @@
     color: #069;
     background-color:tan;
 }
+
+.nav-item {
+    background-color: lightgrey;
+    border-color: black;
+    border-radius: 10px;
+}
