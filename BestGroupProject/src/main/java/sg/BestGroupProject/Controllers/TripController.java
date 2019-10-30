@@ -42,20 +42,20 @@ public class TripController {
 
     @Autowired
     TripService tripService;
-    
+
     @Autowired
     UserDao users;
 
     @GetMapping("/tripHome/{tripId}")
     public String displayContentPage(@PathVariable Integer tripId, Model model) {
-        
+
         Response<Trip> trip = tripService.getTripById(tripId);
         LocalDate day = trip.getData().getStartDate();
         TemporalField field = WeekFields.of(Locale.getDefault()).dayOfWeek();
         LocalDate date = day.with(field, 1);
 
         Response<List<DayOfActivity>> days = tripService.getDaysOfActivities(date, tripId);
-        
+
 //        List<Event> events = new ArrayList<>();
 //        Response<Trip> response = tripService.getTripById(tripId);
 //        response.getData();
@@ -67,9 +67,9 @@ public class TripController {
 
         return "tripHome";
     }
-    
+
     @GetMapping("/event/{eventId}")
-    public String displayEvent(@PathVariable Integer eventId, Model model){
+    public String displayEvent(@PathVariable Integer eventId, Model model) {
 
         Response<Event> response = tripService.getEventById(eventId);
 
@@ -84,7 +84,6 @@ public class TripController {
 //        
 //        return "redirect:/singnUp";
 //    }
-
     @GetMapping("/tripHome/addEvent/{tripId}")
     public String displayAddEvent(@PathVariable Integer tripId, Model model) {
         EnumSet<Category> categories = EnumSet.allOf(Category.class);
@@ -113,35 +112,42 @@ public class TripController {
 //        toAdd.setEndTime(LocalDateTime.parse(endTime));
         toAdd.setCategory(Category.valueOf(categoryId));
 //        event.setTransportationId(transportationId);
-        
+
         String tripId = request.getParameter("tripId");
         toAdd.setTripId(Integer.parseInt(tripId));
         tripService.addEvent(toAdd);
-        
 
         return "redirect:/tripHome/" + toAdd.getTripId();
     }
-    
+
     @GetMapping("/addTrip")
     public String displayAddTrip() {
 
         return "addTrip";
     }
-    
-        @GetMapping("/event/editEvent/{eventId}")
-    public String editEvent( @PathVariable Integer eventId, Model pageModel ){
-        
+
+    @GetMapping("/event/editEvent/{eventId}")
+    public String displayEditEvent(@PathVariable Integer eventId, Model pageModel) {
+        EnumSet<Category> categories = EnumSet.allOf(Category.class);
         //TODO make sure id is not null
-         Event toEdit = tripService.getEventById(eventId).getData();
-         
-         pageModel.addAttribute( "toEdit" , toEdit);
-        
+        Event toEdit = tripService.getEventById(eventId).getData();
+
+        pageModel.addAttribute("toEdit", toEdit);
+        pageModel.addAttribute("categories", categories);
+
         return "editEvent";
     }
+
+    @PostMapping("/event/editEvent")
+    public String editEvent (Event edited){
+        tripService.updateEvent(edited);
+        
+        return "/event/{eventId}";
+    }
     
-     @PostMapping("/addTrip")   
+    @PostMapping("/addTrip")
     public String addTrip(Trip toAdd) {
-        String userName = ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        String userName = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         SiteUser user = users.getUserByUsername(userName);
         List<SiteUser> teachers = new ArrayList();
         teachers.add(user);
@@ -162,14 +168,14 @@ public class TripController {
 //        event.setEndTime(LocalDateTime.parse(endTime));
 //        event.setCategory(Category.valueOf(categoryId));
 //        event.setTransportationId(transportationId);
-               
+
         Response<Integer> trip = tripService.createTrip(toAdd);
 
         return "redirect:/profile";
     }
-    
+
     @GetMapping("message/{id}")
-    public String messages(@PathVariable Integer id, Model model){
+    public String messages(@PathVariable Integer id, Model model) {
         model.addAttribute("tripId", id);
         return "message";
     }
