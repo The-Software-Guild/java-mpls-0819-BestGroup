@@ -157,7 +157,7 @@ public class TripController {
         return "redirect:/profile";
     }
     
-    @GetMapping("tripHome/message/{id}")
+    @GetMapping("message/{id}")
     public String messages(@PathVariable Integer id, Model model){
         model.addAttribute("tripId", id);
         return "message";
