@@ -66,3 +66,54 @@
     border-color: black;
     border-radius: 10px;
 }
+
+.map {
+    height: 80vh;
+}
+
+#week{
+    display: table;
+    height: 65vh;
+
+}
+
+.col {
+    display: table-cell; 
+    width: 14vw; 
+    background-color: lightgrey; 
+    border-radius: 14px; 
+    border-style: solid;
+    max-width: 200px;
+    padding: 10px;
+    
+}
+
+.day{
+    background-color: #b2d0f9; 
+    text-align: center; 
+    border-radius: 10px;
+    margin: 5px; 
+    border-style: solid;
+}
+
+.eventButton {
+/*    white-space: normal;*/
+}
+.loc{
+/*    overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+   This is the dangerous one in WebKit, as it breaks things wherever 
+  word-break: break-all;
+   Instead use this non-standard one: 
+  word-break: break-word;*/
+
+/*   Adds a hyphen where the word breaks, if supported (No Blink) 
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;*/
+    white-space: normal;
+
+}
