@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/addEvent").hasRole("ADMIN")
                     .antMatchers("/addTrip").hasRole("ADMIN")
                     .antMatchers("/", "/home").permitAll()
-                    .antMatchers("/css/**", "/js/**", "/fonts/**").permitAll()
+                    .antMatchers("/css/**", "/js/**", "/fonts/**", "/StyleSheet.css", "/office-1548294_1280 (1).jpg").permitAll()
                     .anyRequest().hasRole("USER")
                 .and()
                 .formLogin()
