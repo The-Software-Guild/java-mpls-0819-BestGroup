@@ -138,11 +138,13 @@ public class TripController {
         return "editEvent";
     }
 
-    @PostMapping("/event/editEvent")
-    public String editEvent (Event edited){
+    @PostMapping("/editEvent")
+    public String editEvent (Event edited, HttpServletRequest request){
+        String categoryId = request.getParameter("categoryId");
+        edited.setCategory(Category.valueOf(categoryId));
         tripService.updateEvent(edited);
         
-        return "/event/{eventId}";
+        return "redirect:/event/" + edited.getId();
     }
     
     @PostMapping("/addTrip")
