@@ -33,95 +33,101 @@ public class ProfileController {
 
     @Autowired
     UserDao users;
-    
+
     @Autowired
     TripService trip;
-    
+
     @Autowired
     PasswordEncoder encoder;
-    
+
     @GetMapping("/profile")
     public String displayProfilePage(Model model) {
-        String userName = ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        String userName = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         SiteUser user = users.getUserByUsername(userName);
         Response<List<Trip>> tResponse = trip.getTripsByUser(user.getId());
         List<Trip> trips = tResponse.getData();
         model.addAttribute("trips", trips);
-        model.addAttribute("users", users.getAllUsers());
-        
+
         return "profile";
     }
-    
+
+    @GetMapping("/addUser")
+    public String addUser(Model model) {
+        model.addAttribute("users", users.getAllUsers());
+
+        return "addUser";
+    }
+
     @PostMapping("/addUser")
     public String addUser(String username, String password, Integer tripId) {
         SiteUser user = new SiteUser();
         user.setUsername(username);
         user.setPassword(encoder.encode(password));
         user.setEnabled(true);
-        
+
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(users.getRoleByRole("ROLE_USER"));
         user.setRoles(userRoles);
-        
+
         users.createUser(user, tripId);
-        
-        return "redirect:/admin";
+
+        return "redirect:/profile";
     }
-    
+
     @PostMapping("/deleteUser")
     public String deleteUser(Integer id) {
         users.deleteUser(id);
-        return "redirect:/admin";
+        return "redirect:/profile";
     }
-    
-    @PostMapping(value="/editUser")
-    public String editUserAction(String[] roleIdList, Boolean enabled, Integer id) {
+
+    @PostMapping(value = "/editUser")
+    public String editUserAction(String[] roleIdList, Boolean enabled, Integer id, Integer tripId) {
         SiteUser user = users.getUserById(id);
-        if(enabled != null) {
+        if (enabled != null) {
             user.setEnabled(enabled);
         } else {
             user.setEnabled(false);
         }
-        
+
         Set<Role> roleList = new HashSet<>();
-        for(String roleId : roleIdList) {
+        for (String roleId : roleIdList) {
             Role role = users.getRoleById(Integer.parseInt(roleId));
             roleList.add(role);
         }
         user.setRoles(roleList);
-        users.updateUser(user);
-        
-        return "redirect:/admin";
+        users.updateUser(user, tripId.intValue());
+
+        return "redirect:/profile";
     }
-    
-    @PostMapping("editPassword") 
+
+    @PostMapping("editPassword")
     public String editPassword(Integer id, String password, String confirmPassword) {
         SiteUser user = users.getUserById(id);
-        
-        if(password.equals(confirmPassword)) {
+
+        if (password.equals(confirmPassword)) {
             user.setPassword(encoder.encode(password));
-            users.updateUser(user);
-            return "redirect:/admin";
+            users.updateUserPassword(user);
+            return "redirect:/profile";
         } else {
             return "redirect:/editUser?id=" + id + "&error=1";
         }
     }
-    
+
     @GetMapping("/editUser")
     public String editUserDisplay(Model model, Integer id, Integer error) {
         SiteUser user = users.getUserById(id);
         List roleList = users.getAllRoles();
-        
+
         model.addAttribute("user", user);
         model.addAttribute("roles", roleList);
-        
-        if(error != null) {
-            if(error == 1) {
+
+        if (error != null) {
+            if (error == 1) {
                 model.addAttribute("error", "Passwords did not match, password was not updated.");
             }
         }
-        
+
         return "editUser";
     }
-    
+
 }

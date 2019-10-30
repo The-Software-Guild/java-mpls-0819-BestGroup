@@ -189,4 +189,5 @@ public class SiteUser {
     public void setEmergencyContactPhone(int emergencyContactPhone) {
         this.emergencyContactPhone = emergencyContactPhone;
     }
+
 }
